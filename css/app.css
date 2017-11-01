@@ -12,6 +12,7 @@ body {
 	width: 456px;
 	height: 456px;
 	margin: 0 auto;
+	border: solid 1px #333;
 }
 
 .puzzle-square {
