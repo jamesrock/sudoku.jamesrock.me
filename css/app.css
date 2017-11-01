@@ -33,6 +33,6 @@ body {
 	cursor: pointer;
 }
 
-.puzzle-square-square[data-hidden="false"] {
+.puzzle-square-square[data-clue="true"] {
 	color: red;
 }
