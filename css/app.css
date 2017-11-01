@@ -30,4 +30,9 @@ body {
 	border: solid 1px black;
 	box-sizing: border-box;
 	font-size: 32px;
+	cursor: pointer;
+}
+
+.puzzle-square-square[data-hidden="0"] {
+	color: white;
 }
