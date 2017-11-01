@@ -90,7 +90,19 @@
 
 			this.puzzleSquare = puzzleSquare;
 			this.value = puzzleSquare.puzzle.data[puzzleSquare.puzzle.item];
-			this.hidden = levels[level][puzzleSquare.puzzle.item];
+			this.hidden = !levels[level][puzzleSquare.puzzle.item];
+			this.node = document.createElement("div");
+
+			this.node.classList.add("puzzle-square-square");
+			this.node.setAttribute("data-hidden", this.hidden);
+
+			if(!this.hidden) {
+
+				this.displayValue = this.value;
+
+			};
+
+			this.updateDisplayValue();
 
 			puzzleSquare.puzzle.item ++;
 
@@ -98,14 +110,64 @@
 		toHTML: function() {
 
 			var
-			node = document.createElement("div");
+			square = this;
 
-			node.classList.add("puzzle-square-square");
-			node.setAttribute("data-value", this.value);
-			node.setAttribute("data-hidden", this.hidden);
-			node.innerHTML = this.value;
+			if(this.hidden) {
 
-			return node;
+				this.node.addEventListener("mousedown", function(e) {
+
+					e.preventDefault();
+					e.stopPropagation();
+
+				});
+
+				this.node.addEventListener("mouseup", function(e) {
+
+					e.preventDefault();
+					e.stopPropagation();
+
+					square.incrementDisplayValue();
+
+				});
+
+			};
+
+			return this.node;
+
+		},
+		incrementDisplayValue: function() {
+
+			if(this.displayValue<=this.max) {
+
+				this.displayValue ++;
+
+			}
+			else {
+
+				this.displayValue = 0;
+
+			};
+
+			this.updateDisplayValue();
+
+			return this;
+
+		},
+		updateDisplayValue: function() {
+
+			var
+			value = "";
+
+			if(this.displayValue>0) {
+
+				value = this.displayValue;
+
+			};
+
+			this.node.innerHTML = value;
+			this.node.setAttribute("data-value", this.displayValue);
+
+			return this;
 
 		},
 		min: 0,
@@ -119,5 +181,7 @@
 	examplePuzzle = new Puzzle(puzzles[0]);
 
 	document.body.appendChild(examplePuzzle.toHTML());
+
+	console.log("examplePuzzle", examplePuzzle);
 
 })();
