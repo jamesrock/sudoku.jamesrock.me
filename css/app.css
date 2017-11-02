@@ -37,3 +37,24 @@ body {
 .puzzle-square-square[data-clue="true"] {
 	color: red;
 }
+
+@media (max-width: 319px) {
+
+	.puzzle {
+		width: 294px;
+		height: 294px;
+	}
+
+	.puzzle-square {
+		width: 96px;
+		height: 96px;
+	}
+
+	.puzzle-square-square {
+		width: 32px;
+		height: 32px;
+		font-size: 32px;
+		line-height: 30px;
+	}
+
+}
