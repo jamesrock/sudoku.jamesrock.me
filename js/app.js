@@ -10,19 +10,19 @@
 		[9, 5, 6, 7, 8, 2, 3, 1, 4, 7, 1, 2, 3, 4, 5, 8, 6, 9, 8, 4, 3, 6, 9, 1, 7, 2, 5, 5, 2, 7, 6, 3, 1, 4, 9, 8, 6, 9, 4, 2, 8, 7, 5, 3, 1, 3, 1, 8, 4, 5, 9, 2, 6, 7, 2, 6, 3, 1, 7, 9, 8, 4, 5, 1, 5, 8, 4, 2, 3, 9, 7, 6, 9, 7, 4, 5, 8, 6, 1, 3, 2]
 	],
 	levels = {
-		EASY: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		TRICKY: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		MEDIUM: [0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0],
 		HARD: [0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],
 		TOUGH: [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1],
-		TRICKY: [0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1]
-	},
-	level = 'MEDIUM';
+		EASY: [0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1]
+	};
 
 	var Puzzle = ROCK.Object.extend({
-		constructor: function Puzzle(data) {
+		constructor: function Puzzle(data, clues) {
 
 			this.squares = [];
 			this.data = data;
+			this.clues = clues;
 			this.item = 0;
 
 			var
@@ -49,6 +49,16 @@
 			});
 
 			return node;
+
+		},
+		save: function() {
+
+			console.log("save");
+
+		},
+		load: function() {
+
+			console.log("load");
 
 		},
 		squareCount: 9,
@@ -95,7 +105,7 @@
 
 			this.puzzleSquare = puzzleSquare;
 			this.value = puzzleSquare.puzzle.data[puzzleSquare.puzzle.item];
-			this.clue = !!levels[level][puzzleSquare.puzzle.item];
+			this.clue = !!puzzleSquare.puzzle.clues[puzzleSquare.puzzle.item];
 			this.node = document.createElement("div");
 
 			this.node.classList.add("puzzle-square-square");
@@ -120,36 +130,36 @@
 			this.node.addEventListener("mousedown", function(e) {
 
 				e.preventDefault();
-				e.stopPropagation();
 
 			});
 
-			if(!this.clue) {
+			this.node.addEventListener("mouseup", function(e) {
 
-				this.node.addEventListener("mouseup", function(e) {
+				e.preventDefault();
 
-					e.preventDefault();
-					e.stopPropagation();
+				square.incrementDisplayValue();
 
-					square.incrementDisplayValue();
-
-				});
-
-			};
+			});
 
 			return this.node;
 
 		},
 		incrementDisplayValue: function() {
 
-			if(this.displayValue<=this.max) {
+			if(this.clue) {
+
+				return this;
+
+			};
+
+			if(this.displayValue<this.max) {
 
 				this.displayValue ++;
 
 			}
 			else {
 
-				this.displayValue = 0;
+				this.displayValue = this.min;
 
 			};
 
@@ -160,30 +170,21 @@
 		},
 		updateDisplayValue: function() {
 
-			var
-			value = "";
-
-			if(this.displayValue>0) {
-
-				value = this.displayValue;
-
-			};
-
-			this.node.innerHTML = value;
+			this.node.innerHTML = (this.displayValue>0?this.displayValue:"");
 			this.node.setAttribute("data-value", this.displayValue);
 
 			return this;
 
 		},
 		min: 0,
-		max: 8,
+		max: 9,
 		value: 0,
 		displayValue: 0,
 		clue: false
 	});
 
 	var
-	examplePuzzle = new Puzzle(puzzles[0]);
+	examplePuzzle = new Puzzle(puzzles[0], levels.EASY);
 
 	document.body.appendChild(examplePuzzle.toHTML());
 

@@ -12,7 +12,7 @@ body {
 	width: 456px;
 	height: 456px;
 	margin: 0 auto;
-	border: solid 1px #333;
+	border: solid 2px #333;
 }
 
 .puzzle-square {
@@ -27,10 +27,10 @@ body {
 	height: 50px;
 	float: left;
 	text-align: center;
-	line-height: 50px;
+	line-height: 48px;
 	border: solid 1px #333;
 	box-sizing: border-box;
-	font-size: 32px;
+	font-size: 50px;
 	cursor: pointer;
 }
 
