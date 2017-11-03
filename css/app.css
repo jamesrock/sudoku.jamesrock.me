@@ -38,7 +38,7 @@ body {
 	color: red;
 }
 
-@media (max-width: 319px) {
+@media (max-width: 320px) {
 
 	.puzzle {
 		width: 294px;

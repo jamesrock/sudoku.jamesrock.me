@@ -93,6 +93,29 @@
 			return this;
 
 		},
+		validate: function() {
+
+			var
+			wrong = 0;
+
+			this.squares.forEach(function(square) {
+
+				square.squares.forEach(function(squareSquare) {
+
+					if(!(squareSquare.displayValue===squareSquare.value)) {
+
+						wrong ++;
+
+					};
+
+				});
+
+			});
+
+			// return wrong;
+			return wrong===0;
+
+		},
 		squareCount: 9,
 		item: 0
 	});
@@ -234,12 +257,18 @@
 
 		localStorage.setItem(namespace, JSON.stringify(saveObject));
 
+		if(examplePuzzle.validate()) {
+
+			alert("well done!");
+
+		};
+
 		return this;
 
 	},
 	startNewGame = function() {
 
-		examplePuzzle = new Puzzle(0, "EASY");
+		examplePuzzle = new Puzzle(ROCK.MATH.random(0, puzzles.length-1), "EASY");
 		localStorage.removeItem(namespace);
 
 	},
@@ -254,7 +283,7 @@
 
 	if(savedGame) {
 
-		if(confirm("would you like to start over? press cancel to continue your saved game")) {
+		if(confirm("would you like to start a new game? press cancel to continue your saved game")) {
 
 			startNewGame();
 
