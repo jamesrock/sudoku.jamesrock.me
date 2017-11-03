@@ -9,16 +9,16 @@ body {
 }
 
 .puzzle {
-	width: 456px;
-	height: 456px;
+	width: 474px;
+	height: 474px;
 	margin: 0 auto;
 	border: solid 2px black;
 }
 
 .puzzle-square {
 	float: left;
-	width: 150px;
-	height: 150px;
+	width: 156px;
+	height: 156px;
 	border: solid 1px black;
 }
 
@@ -29,7 +29,6 @@ body {
 	text-align: center;
 	line-height: 48px;
 	border: solid 1px black;
-	box-sizing: border-box;
 	font-size: 50px;
 	cursor: pointer;
 }
@@ -41,20 +40,20 @@ body {
 @media (max-width: 320px) {
 
 	.puzzle {
-		width: 294px;
-		height: 294px;
+		width: 312px;
+		height: 312px;
 	}
 
 	.puzzle-square {
-		width: 96px;
-		height: 96px;
+		width: 102px;
+		height: 102px;
 	}
 
 	.puzzle-square-square {
 		width: 32px;
 		height: 32px;
 		font-size: 32px;
-		line-height: 30px;
+		line-height: 32px;
 	}
 
 }
