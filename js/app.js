@@ -1,7 +1,5 @@
 (function() {
 
-	console.log("sudoku");
-
 	var
 	puzzles = [
 		[5, 3, 4, 6, 7, 2, 1, 9, 8, 6, 7, 8, 1, 9, 5, 3, 4, 2, 9, 1, 2, 3, 4, 8, 5, 6, 7, 8, 5, 9, 4, 2, 6, 7, 1, 3, 7, 6, 1, 8, 5, 3, 9, 2, 4, 4, 2, 3, 7, 9, 1, 8, 5, 6, 9, 6, 1, 2, 8, 7, 3, 4, 5, 5, 3, 7, 4, 1, 9, 2, 8, 6, 2, 8, 4, 6, 3, 5, 1, 7, 9],
@@ -31,6 +29,10 @@
 		HARD: [0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0],
 		TOUGH: [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1],
 		EASY: [0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0]
+	},
+	strings = {
+		complete: "well done!",
+		newgame: "would you like to start a new game? press cancel to continue your saved game"
 	};
 
 	var Puzzle = ROCK.Object.extend({
@@ -69,18 +71,12 @@
 		},
 		getData: function() {
 
-			console.log("getData");
-
 			var
 			output = [];
 
-			this.squares.forEach(function(square) {
+			this.forEachSquare(function(square) {
 
-				square.squares.forEach(function(squareSquare) {
-
-					output.push(squareSquare.displayValue);
-
-				});
+				output.push(square.displayValue);
 
 			});
 
@@ -89,20 +85,14 @@
 		},
 		setData: function(data) {
 
-			console.log("setData");
-
 			var
 			inc = 0;
 
-			this.squares.forEach(function(square) {
+			this.forEachSquare(function(square) {
 
-				square.squares.forEach(function(squareSquare) {
-
-					squareSquare.displayValue = data[inc];
-					squareSquare.updateDisplayValue();
-					inc ++;
-
-				});
+				square.displayValue = data[inc];
+				square.updateDisplayValue();
+				inc ++;
 
 			});
 
@@ -114,22 +104,33 @@
 			var
 			wrong = 0;
 
-			this.squares.forEach(function(square) {
+			this.forEachSquare(function(square) {
 
-				square.squares.forEach(function(squareSquare) {
+				if(!(square.displayValue===square.value)) {
 
-					if(!(squareSquare.displayValue===squareSquare.value)) {
+					wrong ++;
 
-						wrong ++;
-
-					};
-
-				});
+				};
 
 			});
 
 			// return wrong;
 			return wrong===0;
+
+		},
+		forEachSquare: function(callback) {
+
+			this.squares.forEach(function(square) {
+
+				square.squares.forEach(function(squareSquare) {
+
+					callback(squareSquare);
+
+				});
+
+			});
+
+			return this;
 
 		},
 		squareCount: 9,
@@ -262,20 +263,18 @@
 	savedObject,
 	saveGame = function() {
 
-		console.log("saveGame");
-
 		var
 		saveObject = {
-			puzzle: examplePuzzle.puzzle,
-			clues: examplePuzzle.clues,
-			data: examplePuzzle.getData()
+			puzzle: gamePuzzle.puzzle,
+			clues: gamePuzzle.clues,
+			data: gamePuzzle.getData()
 		};
 
 		localStorage.setItem(namespace, JSON.stringify(saveObject));
 
-		if(examplePuzzle.validate()) {
+		if(gamePuzzle.validate()) {
 
-			alert("well done!");
+			alert(strings.complete);
 
 		};
 
@@ -284,7 +283,7 @@
 	},
 	startNewGame = function() {
 
-		examplePuzzle = new Puzzle(ROCK.MATH.random(0, puzzles.length-1), "EASY");
+		gamePuzzle = new Puzzle(ROCK.MATH.random(0, puzzles.length-1), "EASY");
 		localStorage.removeItem(namespace);
 
 	},
@@ -292,14 +291,14 @@
 
 		savedObject = JSON.parse(savedGame);
 
-		examplePuzzle = new Puzzle(savedObject.puzzle, savedObject.clues);
-		examplePuzzle.setData(savedObject.data);
+		gamePuzzle = new Puzzle(savedObject.puzzle, savedObject.clues);
+		gamePuzzle.setData(savedObject.data);
 
 	};
 
 	if(savedGame) {
 
-		if(confirm("would you like to start a new game? press cancel to continue your saved game")) {
+		if(confirm(strings.newgame)) {
 
 			startNewGame();
 
@@ -317,8 +316,6 @@
 
 	};
 
-	document.body.appendChild(examplePuzzle.toHTML());
-
-	console.log("examplePuzzle", examplePuzzle);
+	document.body.appendChild(gamePuzzle.toHTML());
 
 })();
