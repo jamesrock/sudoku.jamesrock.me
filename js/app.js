@@ -258,6 +258,7 @@
 	});
 
 	var
+	difficulty = "EASY",
 	namespace = "sudoku.jamesrock.me",
 	savedGame = localStorage.getItem(namespace),
 	savedObject,
@@ -283,7 +284,7 @@
 	},
 	startNewGame = function() {
 
-		gamePuzzle = new Puzzle(ROCK.MATH.random(0, puzzles.length-1), "EASY");
+		gamePuzzle = new Puzzle(ROCK.MATH.random(0, puzzles.length-1), difficulty);
 		localStorage.removeItem(namespace);
 
 	},
