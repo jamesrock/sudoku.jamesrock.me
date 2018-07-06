@@ -1,0 +1,14 @@
+CACHE MANIFEST
+# version 1.0.0
+
+js/app.js
+css/app.css
+index.html
+
+NETWORK:
+# All URLs that start with the following lines are whitelisted
+
+CACHE:
+# Additional items to cache
+
+FALLBACK:
