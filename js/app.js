@@ -77,7 +77,7 @@
 
 			};
 
-			context.lineWidth = 4;
+			context.lineWidth = 2;
 			context.lineCap = 'round';
 
 			// renderer.node.addEventListener('click', function() {
@@ -115,8 +115,8 @@
 					box = boxes[boxCount];
 					boxPoints = 0;
 
-					context.stroke();
 					context.fill();
+					context.stroke();
 					context.closePath();
 
 				};
