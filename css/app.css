@@ -5,58 +5,5 @@
 
 body {
 	font-family: sans-serif;
-	padding-top: 50px;
-	background-color: ghostwhite;
-}
-
-.puzzle {
-	width: 474px;
-	height: 474px;
-	margin: 0 auto;
-	border: solid 2px black;
-	background-color: honeydew;
-}
-
-.puzzle-square {
-	float: left;
-	width: 156px;
-	height: 156px;
-	border: solid 1px black;
-}
-
-.puzzle-square-square {
-	width: 50px;
-	height: 50px;
-	float: left;
-	text-align: center;
-	line-height: 48px;
-	border: solid 1px black;
-	font-size: 50px;
-	cursor: pointer;
-	position: relative;
-}
-
-.puzzle-square-square[data-clue="true"] {
-	background-color: blanchedalmond;
-}
-
-@media (max-width: 320px) {
-
-	.puzzle {
-		width: 312px;
-		height: 312px;
-	}
-
-	.puzzle-square {
-		width: 102px;
-		height: 102px;
-	}
-
-	.puzzle-square-square {
-		width: 32px;
-		height: 32px;
-		font-size: 34px;
-		line-height: 32px;
-	}
-
+	background-color: rgb(98, 181, 173);
 }

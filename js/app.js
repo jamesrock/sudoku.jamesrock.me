@@ -2,102 +2,128 @@
 
 	var
 	puzzles = [
-		[5, 3, 4, 6, 7, 2, 1, 9, 8, 6, 7, 8, 1, 9, 5, 3, 4, 2, 9, 1, 2, 3, 4, 8, 5, 6, 7, 8, 5, 9, 4, 2, 6, 7, 1, 3, 7, 6, 1, 8, 5, 3, 9, 2, 4, 4, 2, 3, 7, 9, 1, 8, 5, 6, 9, 6, 1, 2, 8, 7, 3, 4, 5, 5, 3, 7, 4, 1, 9, 2, 8, 6, 2, 8, 4, 6, 3, 5, 1, 7, 9],
-		[8, 2, 7, 9, 6, 5, 3, 4, 1, 1, 5, 4, 3, 2, 7, 6, 8, 9, 3, 9, 6, 1, 4, 8, 7, 5, 2, 5, 9, 3, 4, 7, 2, 6, 1, 8, 4, 6, 8, 5, 1, 3, 9, 7, 2, 2, 7, 1, 6, 8, 9, 4, 3, 5, 7, 8, 6, 1, 5, 4, 2, 3, 9, 2, 3, 5, 7, 9, 6, 8, 4, 1, 9, 1, 4, 8, 2, 3, 5, 6, 7],
-		[5, 6, 2, 8, 1, 4, 7, 3, 9, 1, 8, 4, 3, 9, 7, 5, 6, 2, 9, 7, 3, 2, 5, 6, 1, 4, 8, 3, 4, 6, 2, 9, 8, 1, 5, 7, 9, 7, 8, 4, 5, 1, 2, 3, 6, 5, 2, 1, 6, 3, 7, 8, 9, 4, 9, 7, 1, 4, 2, 3, 6, 8, 5, 6, 4, 5, 8, 1, 9, 7, 2, 3, 3, 8, 2, 7, 6, 5, 4, 1, 9],
-		[9, 5, 6, 7, 8, 2, 3, 1, 4, 7, 1, 2, 3, 4, 5, 8, 6, 9, 8, 4, 3, 6, 9, 1, 7, 2, 5, 5, 2, 7, 6, 3, 1, 4, 9, 8, 6, 9, 4, 2, 8, 7, 5, 3, 1, 3, 1, 8, 4, 5, 9, 2, 6, 7, 2, 6, 3, 1, 7, 9, 8, 4, 5, 1, 5, 8, 4, 2, 3, 9, 7, 6, 9, 7, 4, 5, 8, 6, 1, 3, 2],
-		[1, 6, 4, 8, 7, 9, 5, 3, 2, 5, 2, 8, 3, 4, 6, 9, 1, 7, 3, 7, 9, 2, 1, 5, 4, 6, 8, 3, 8, 6, 7, 4, 1, 2, 9, 5, 2, 9, 1, 8, 5, 3, 7, 6, 4, 5, 4, 7, 6, 9, 2, 1, 8, 3, 4, 5, 7, 6, 2, 8, 9, 1, 3, 1, 8, 2, 4, 3, 9, 6, 7, 5, 9, 3, 6, 7, 5, 1, 8, 2, 4],
-		[4, 2, 6, 9, 3, 1, 8, 5, 7, 8, 5, 1, 2, 6, 7, 4, 9, 3, 9, 7, 3, 4, 5, 8, 2, 1, 6, 6, 1, 5, 2, 9, 4, 7, 8, 3, 7, 4, 9, 3, 1, 8, 6, 2, 5, 8, 3, 2, 7, 6, 5, 1, 9, 4, 5, 4, 2, 1, 6, 8, 3, 7, 9, 1, 7, 6, 9, 3, 2, 5, 8, 4, 3, 8, 9, 5, 4, 7, 6, 2, 1],
-		[2, 4, 8, 1, 3, 6, 5, 7, 9, 6, 1, 9, 5, 8, 7, 4, 2, 3, 7, 5, 3, 2, 9, 4, 6, 1, 8, 7, 8, 2, 4, 1, 5, 6, 9, 3, 1, 9, 4, 3, 7, 6, 2, 5, 8, 3, 6, 5, 8, 2, 9, 4, 7, 1, 9, 6, 7, 3, 2, 4, 8, 5, 1, 8, 3, 5, 9, 6, 1, 7, 4, 2, 1, 4, 2, 5, 8, 7, 9, 3, 6],
-		[2, 4, 3, 9, 1, 5, 7, 8, 6, 6, 7, 1, 2, 4, 8, 9, 3, 5, 5, 8, 9, 6, 7, 3, 1, 4, 2, 3, 7, 1, 4, 6, 9, 5, 2, 8, 5, 6, 2, 3, 8, 7, 4, 1, 9, 8, 9, 4, 2, 5, 1, 7, 3, 6, 1, 9, 4, 8, 5, 2, 6, 3, 7, 7, 5, 6, 1, 9, 3, 8, 2, 4, 3, 2, 8, 4, 6, 7, 9, 1, 5],
-		[2, 1, 9, 7, 6, 4, 5, 8, 3, 6, 4, 5, 8, 3, 9, 2, 1, 7, 3, 7, 8, 5, 2, 1, 6, 9, 4, 9, 5, 2, 1, 7, 8, 3, 4, 6, 7, 6, 8, 4, 9, 3, 1, 5, 2, 4, 1, 3, 2, 5, 6, 9, 8, 7, 6, 2, 1, 4, 3, 7, 8, 9, 5, 4, 8, 4, 9, 2, 1, 3, 7, 6, 7, 3, 9, 8, 6, 5, 1, 4, 2],
-		[4, 9, 1, 7, 8, 2, 5, 6, 3, 6, 3, 8, 1, 5, 4, 7, 9, 2, 7, 2, 5, 6, 9, 3, 1, 4, 8, 3, 1, 4, 9, 7, 8, 2, 5, 6, 5, 6, 9, 2, 4, 1, 8, 7, 3, 2, 8, 7, 5, 3, 6, 9, 1, 4, 1, 2, 5, 8, 4, 7, 6, 3, 9, 3, 8, 6, 9, 2, 5, 4, 1, 7, 4, 7, 9, 3, 6, 1, 8, 5, 2],
-		[1, 7, 6, 9, 2, 5, 4, 8, 3, 5, 2, 9, 4, 8, 3, 6, 7, 1, 3, 8, 4, 7, 1, 6, 2, 5, 9, 3, 9, 2, 5, 4, 7, 6, 1, 8, 8, 1, 4, 3, 9, 6, 7, 5, 2, 5, 6, 7, 8, 2, 1, 4, 9, 3, 2, 3, 9, 8, 6, 1, 7, 5, 4, 1, 4, 5, 2, 3, 7, 9, 6, 8, 6, 7, 8, 9, 4, 5, 1, 3, 2],
-		[2, 8, 3, 1, 9, 6, 5, 7, 4, 1, 7, 5, 3, 2, 4, 8, 9, 6, 4, 9, 6, 8, 7, 5, 2, 1, 3, 9, 1, 8, 4, 6, 5, 3, 2, 7, 4, 3, 2, 9, 1, 7, 5, 6, 8, 5, 6, 7, 3, 8, 2, 1, 4, 9, 7, 5, 9, 8, 3, 1, 6, 4, 2, 2, 4, 1, 6, 5, 9, 7, 8, 3, 6, 3, 8, 7, 2, 4, 9, 5, 1],
-		[3, 4, 8, 1, 5, 2, 7, 6, 9, 9, 6, 2, 4, 3, 7, 1, 8, 5, 1, 7, 5, 6, 8, 9, 4, 3, 2, 9, 2, 6, 5, 1, 4, 8, 3, 7, 3, 5, 1, 8, 7, 6, 2, 9, 4, 8, 4, 7, 9, 2, 3, 5, 6, 1, 2, 9, 5, 4, 7, 1, 6, 8, 3, 6, 4, 3, 5, 2, 8, 7, 1, 9, 7, 1, 8, 3, 9, 6, 2, 5, 4],
-		[3, 9, 4, 8, 7, 2, 5, 1, 6, 6, 8, 2, 5, 4, 1, 3, 9, 7, 5, 1, 7, 3, 9, 6, 2, 8, 4, 1, 2, 5, 6, 3, 8, 7, 4, 9, 9, 6, 4, 7, 2, 5, 1, 3, 8, 8, 7, 3, 1, 4, 9, 6, 2, 5, 9, 5, 7, 4, 8, 3, 2, 6, 1, 8, 1, 6, 2, 5, 9, 4, 7, 3, 4, 3, 2, 7, 6, 1, 9, 5, 8],
-		[4, 2, 7, 6, 8, 3, 1, 5, 9, 9, 5, 8, 1, 4, 7, 2, 3, 6, 1, 3, 6, 5, 2, 9, 4, 8, 7, 8, 6, 5, 9, 7, 4, 3, 1, 2, 7, 1, 3, 8, 6, 2, 5, 9, 4, 9, 4, 2, 3, 1, 5, 7, 6, 8, 2, 4, 8, 5, 9, 6, 7, 3, 1, 3, 7, 5, 4, 8, 1, 6, 2, 9, 6, 9, 1, 2, 7, 3, 8, 5, 4],
-		[4, 1, 8, 2, 7, 9, 3, 5, 6, 5, 6, 7, 4, 1, 3, 9, 2, 8, 2, 9, 3, 6, 8, 5, 1, 7, 4, 1, 3, 4, 8, 6, 2, 7, 9, 5, 7, 8, 5, 1, 9, 4, 2, 3, 6, 9, 2, 6, 5, 3, 7, 4, 1, 8, 9, 4, 3, 6, 2, 7, 5, 8, 1, 6, 7, 2, 8, 5, 1, 3, 4, 9, 8, 5, 1, 3, 4, 9, 7, 6, 2],
-		[6, 2, 1, 5, 8, 7, 4, 3, 9, 8, 4, 9, 6, 3, 2, 1, 7, 5, 3, 7, 5, 9, 4, 1, 6, 2, 8, 8, 5, 4, 2, 9, 3, 7, 1, 6, 9, 1, 7, 5, 6, 4, 2, 8, 3, 2, 6, 3, 8, 1, 7, 4, 5, 9, 9, 6, 5, 3, 7, 2, 1, 4, 8, 7, 2, 8, 4, 9, 1, 3, 5, 6, 1, 3, 4, 5, 8, 6, 7, 9, 2],
-		[7, 2, 9, 1, 6, 3, 5, 8, 4, 1, 3, 4, 5, 9, 8, 7, 6, 2, 6, 8, 5, 4, 2, 7, 3, 1, 9, 8, 4, 6, 9, 1, 7, 3, 5, 2, 9, 2, 1, 3, 5, 6, 8, 4, 7, 5, 7, 3, 8, 4, 2, 9, 6, 1, 6, 7, 5, 2, 3, 8, 4, 9, 1, 2, 8, 3, 4, 1, 9, 6, 7, 5, 1, 9, 4, 7, 5, 6, 2, 3, 8],
-		[6, 2, 9, 3, 1, 4, 7, 5, 8, 8, 5, 1, 7, 6, 2, 4, 3, 9, 4, 7, 3, 9, 5, 8, 6, 1, 2, 2, 8, 3, 5, 6, 7, 4, 9, 1, 5, 9, 7, 1, 4, 8, 3, 2, 6, 1, 6, 4, 2, 3, 9, 5, 8, 7, 9, 7, 5, 1, 3, 2, 8, 4, 6, 2, 1, 3, 6, 8, 4, 9, 7, 5, 8, 4, 6, 7, 9, 5, 3, 2, 1],
-		[7, 4, 1, 8, 6, 9, 5, 3, 2, 3, 6, 2, 5, 1, 4, 7, 9, 8, 8, 5, 9, 2, 7, 3, 4, 6, 1, 1, 2, 7, 4, 9, 8, 6, 5, 3, 9, 8, 3, 2, 5, 6, 1, 4, 7, 5, 4, 6, 1, 3, 7, 9, 8, 2, 9, 1, 6, 3, 7, 5, 2, 8, 4, 8, 3, 5, 4, 2, 1, 6, 7, 9, 7, 2, 4, 6, 9, 8, 3, 1, 5]
+		[
+			[
+				[[0, 0], [3, 0], [3, 1], [4, 1], [4, 3], [1, 3], [1, 1], [0, 1], [0, 0]],
+				[[3, 0], [9, 0], [9, 2], [6, 2], [6, 1], [3, 1], [3, 0]],
+				[[4, 1], [6, 1], [6, 2], [8, 2], [8, 4], [7, 4], [7, 3], [6, 3], [6, 4], [4, 4], [4, 1]],
+				[[0, 1], [1, 1], [1, 4], [3, 4], [3, 5], [1, 5], [1, 8], [0, 8], [0, 1]],
+				[[1, 3], [4, 3], [4, 4], [6, 4], [6, 5], [4, 5], [4, 6], [1, 6], [1, 5], [3, 5], [3, 4], [1, 4], [1, 3]],
+				[[6, 3], [7, 3], [7, 4], [8, 4], [8, 2], [9, 2], [9, 7], [8, 7], [8, 5], [7, 5], [7, 6], [6, 6], [6, 3]],
+				[[4, 5], [6, 5], [6, 6], [7, 6], [7, 5], [8, 5], [8, 7], [6, 7], [6, 8], [4, 8], [4, 5]],
+				[[1, 6], [4, 6], [4, 8], [3, 8], [3, 9], [0, 9], [0, 8], [1, 8], [1, 6]],
+				[[3, 8], [6, 8], [6, 7], [9, 7], [9, 9], [3, 9], [3, 8]]
+			], // boxes
+			[], // numbers
+			[]  // clues
+		]
 	],
-	clues = {
-		EASY: [0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0],
-		MEDIUM: [0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0],
-		HARD: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		METRO_EASY: [0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0],
-		METRO_MODERATE: [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1],
-		METRO_CHALLENGING: [0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0]
-	},
+	colours = [
+		[199, 217, 140], [229, 205, 239], [192, 230, 250], [188, 223, 199], [212, 208, 241], [250, 216, 234], [247, 214, 193], [255, 251, 196], [197, 210, 244]
+	],
 	strings = {
-		complete: "well done!",
-		newgame: "start a new game?"
+		complete: 'well done!',
+		newgame: 'start a new game?'
 	};
 
 	var Puzzle = ROCK.Object.extend({
-		constructor: function Puzzle(puzzle, clues) {
+		constructor: function Puzzle(puzzle) {
 
 			this.squares = [];
-			this.puzzle = puzzle;
-			this.clues = clues;
-			this.item = 0;
+			this.boxes = puzzle[0];
+			this.numbers = puzzle[1];
+			this.clues = puzzle[2];
+
+		},
+		render: function(renderer) {
 
 			var
-			numberOfSquares = this.squareCount;
+			boxes = this.boxes,
+			boxCount = 0,
+			box = boxes[boxCount],
+			boxPoints = 0,
+			boxPoint,
+			boxSize = 50,
+			offset = 100,
+			context = renderer.context;
 
-			while(numberOfSquares--) {
+			// while(boxCount--) {
+			while(false) {
 
-				this.squares.push(new PuzzleSquare(this));
+				box = this.boxes[boxCount];
+				boxPoints = box.length;
+
+				console.log('boxPoints', boxPoints);
+
+				// context.moveTo(box[0][0], box[0][1]);
+
+				// context.beginPath();
+
+				while(boxPoints--) {
+
+					boxPoint = box[boxPoints];
+
+					// context.moveTo(boxPoint[0]*boxSize, boxPoint[1]*boxSize);
+
+					context.lineTo(boxPoint[0]*boxSize, boxPoint[1]*boxSize);
+					context.stroke();
+					// context.closePath();
+
+					// console.log(boxPoints[0]*boxSize, boxPoints[1]*boxSize);
+
+				};
+
+				console.log(boxCount);
 
 			};
 
-		},
-		toHTML: function() {
+			context.lineWidth = 4;
+			context.lineCap = 'round';
 
-			var
-			node = document.createElement("div");
+			// renderer.node.addEventListener('click', function() {
+			setInterval(function() {
 
-			node.classList.add("puzzle");
+				if(boxCount===boxes.length) {
 
-			this.squares.forEach(function(square) {
+					return;
 
-				node.appendChild(square.toHTML());
+				};
 
-			});
+				boxPoint = box[boxPoints];
 
-			return node;
+				if(boxPoints===0) {
 
-		},
-		getData: function() {
+					context.beginPath();
+					context.moveTo((boxPoint[0]*boxSize)+offset, (boxPoint[1]*boxSize)+offset);
+					context.fillStyle = 'rgb(' + colours[boxCount].join(', ') + ')';
+					console.log(box);
 
-			var
-			output = [];
+				}
+				else {
 
-			this.forEachSquare(function(square) {
+					context.lineTo((boxPoint[0]*boxSize)+offset, (boxPoint[1]*boxSize)+offset);
 
-				output.push(square.displayValue);
+				};
 
-			});
+				console.log(boxPoint);
 
-			return output;
+				boxPoints ++;
 
-		},
-		setData: function(data) {
+				if(boxPoints===box.length) {
 
-			var
-			inc = 0;
+					boxCount ++;
+					box = boxes[boxCount];
+					boxPoints = 0;
 
-			this.forEachSquare(function(square) {
+					context.stroke();
+					context.fill();
+					context.closePath();
 
-				square.displayValue = data[inc];
-				square.updateDisplayValue();
-				inc ++;
+				};
 
-			});
+			}, 50);
 
-			return this;
+			// });
 
 		},
 		validate: function() {
@@ -138,143 +164,229 @@
 		item: 0
 	});
 
-	var PuzzleSquare = ROCK.Object.extend({
-		constructor: function PuzzleSquare(puzzle) {
+	var Scene = ROCK.Object.extend({
+		constructor: function Scene() {
 
-			this.squares = [];
-			this.puzzle = puzzle;
-
-			var
-			numberOfSquares = this.squareCount;
-
-			while(numberOfSquares--) {
-
-				this.squares.push(new PuzzleSquareSquare(this));
-
-			};
+			this.children = [];
 
 		},
-		toHTML: function() {
+		add: function(child) {
 
-			var
-			node = document.createElement("div");
+			this.children.push(child);
+			child.scene = this;
+			child.z = this.children.length;
 
-			node.classList.add("puzzle-square");
-
-			this.squares.forEach(function(square) {
-
-				node.appendChild(square.toHTML());
-
-			});
-
-			return node;
-
-		},
-		squareCount: 9
+		}
 	});
 
-	var PuzzleSquareSquare = ROCK.Object.extend({
-		constructor: function PuzzleSquareSquare(puzzleSquare) {
+	var Renderer = ROCK.Object.extend({
+		constructor: function Renderer(width, height, scale) {
 
-			this.puzzleSquare = puzzleSquare;
-			this.value = puzzles[puzzleSquare.puzzle.puzzle][puzzleSquare.puzzle.item];
-			this.clue = !!clues[puzzleSquare.puzzle.clues][puzzleSquare.puzzle.item];
-			this.node = document.createElement("div");
+			this.width = width;
+			this.height = height;
+			this.scale = scale;
 
-			this.node.classList.add("puzzle-square-square");
-			this.node.setAttribute("data-clue", this.clue);
+			// console.log('new Renderer()', this, arguments);
 
-			if(this.clue) {
+			this.node = document.createElement('canvas');
+			this.context = this.node.getContext(this.type);
 
-				this.displayValue = this.value;
+			this.node.width = (this.width);
+			this.node.height = (this.height);
+
+			this.node.style.width = (this.width + 'px');
+			this.node.style.height = (this.height + 'px');
+
+		},
+		render: function() {
+
+			var
+			childrenCount = this.scene.children.length,
+			_this = this;
+
+			this.scene.renderer = this;
+
+			// clear
+			this.node.width = this.width;
+
+			for(var i=0;i<childrenCount;i++) {
+
+				this.scene.children[i].render(_this);
 
 			};
 
-			this.updateDisplayValue();
-
-			puzzleSquare.puzzle.item ++;
+			return this;
 
 		},
-		toHTML: function() {
+		appendTo: function(child) {
+
+			child.appendChild(this.node);
+			return this;
+
+		},
+		start: function() {
 
 			var
-			square = this;
+			_this = this;
 
-			this.node.addEventListener("mousedown", function(e) {
+			this.frame = requestAnimationFrame(function() {
 
-				e.preventDefault();
-
-			});
-
-			this.node.addEventListener("mouseup", function(e) {
-
-				e.preventDefault();
-
-				square.incrementDisplayValue();
+				_this.start();
 
 			});
 
-			return this.node;
+			this.render();
 
-		},
-		incrementDisplayValue: function() {
-
-			if(this.clue) {
+			if(this.paused) {
 
 				return this;
 
 			};
 
-			if(this.displayValue<this.max) {
+			this.onFrameChange.call(this);
 
-				this.displayValue ++;
+			return this;
 
-			}
-			else {
+		},
+		stop: function() {
 
-				this.displayValue = this.min;
+			cancelAnimationFrame(this.frame);
+			return this;
+
+		},
+		setScene: function(scene) {
+
+			this.scene = scene;
+			return this;
+
+		},
+		pause: function() {
+
+			this.paused = !this.paused;
+			return this;
+
+		},
+		type: '2d',
+		scene: null,
+		scale: 1,
+		frame: 0,
+		paused: false
+	});
+
+	var DisplayObject = ROCK.Object.extend({
+		x: 0,
+		y: 0,
+		z: 0,
+		width: 0,
+		height: 0,
+		rotation: 0,
+		visible: true,
+		xOffset: 0,
+		yOffset: 0,
+		opacity: 1,
+		bind: function(event, handler) {
+
+			var
+			sprite = this;
+
+			if(this.scene.renderer) {
+
+				var
+				handlerProxy = function(e) {
+
+					if(!sprite.visible) {
+						return;
+					};
+
+					var
+					touch,
+					touchX,
+					touchY;
+
+					if(isTouch) {
+
+						touch = e.changedTouches[0];
+						touchX = touch.clientX-touch.target.offsetLeft;
+						touchY = touch.clientY-touch.target.offsetTop;
+
+					}
+					else {
+
+						touch = e;
+						touchX = touch.offsetX;
+						touchY = touch.offsetY;
+
+					};
+
+					if(new Circle('red', 6, deflate(touchX), deflate(touchY)).hitTest(sprite)) {
+
+						handler.call(sprite, e, touchX, touchY);
+
+					};
+
+					e.preventDefault();
+
+				};
+
+				this.scene.renderer.node.addEventListener(event, handlerProxy);
+
+				events[this.name] = events[this.name]||[];
+				events[this.name].push({
+					type: event,
+					handler: handler,
+					handlerProxy: handlerProxy
+				});
 
 			};
 
-			this.updateDisplayValue();
-
-			saveGame();
-
 			return this;
 
 		},
-		updateDisplayValue: function() {
+		unbind: function(event, handler) {
 
-			this.node.innerHTML = (this.displayValue>0?this.displayValue:"");
-			this.node.setAttribute("data-value", this.displayValue);
+			// console.log('unbind()', events[this.name]);
 
-			return this;
+			var
+			obj = events[this.name].filter(function(e) {
+				return e.type===event&&e.handler===handler;
+			})[0];
+
+			events[this.name].splice(events[this.name].indexOf(obj), 1);
+
+			this.scene.renderer.node.removeEventListener(event, obj.handlerProxy);
 
 		},
-		min: 0,
-		max: 9,
-		value: 0,
-		displayValue: 0,
-		clue: false
+		move: function(prop, value) {
+
+			this[prop] += value;
+			return this[prop];
+
+		}
 	});
 
 	var
-	difficulty = "MEDIUM",
-	namespace = "sudoku.jamesrock.me",
+	difficulty = 'MEDIUM',
+	namespace = 'sudoku.jamesrock.me',
 	savedGame = localStorage.getItem(namespace),
 	savedObject,
+	width = 500,
+	height = 500,
+	scale = 10,
+	game = new Scene(),
+	renderer = new Renderer(1000, 1000, scale),
+	puzzle,
 	saveGame = function() {
 
 		var
 		saveObject = {
-			puzzle: gamePuzzle.puzzle,
-			clues: gamePuzzle.clues,
-			data: gamePuzzle.getData()
+			puzzle: puzzle.puzzle,
+			clues: puzzle.clues,
+			data: puzzle.getData()
 		};
 
 		localStorage.setItem(namespace, JSON.stringify(saveObject));
 
-		if(gamePuzzle.validate()) {
+		if(puzzle.validate()) {
 
 			alert(strings.complete);
 
@@ -285,7 +397,7 @@
 	},
 	startNewGame = function() {
 
-		gamePuzzle = new Puzzle(ROCK.MATH.random(0, puzzles.length-1), difficulty);
+		puzzle = new Puzzle(puzzles[ROCK.MATH.random(0, puzzles.length-1)], difficulty);
 		localStorage.removeItem(namespace);
 
 	},
@@ -293,8 +405,8 @@
 
 		savedObject = JSON.parse(savedGame);
 
-		gamePuzzle = new Puzzle(savedObject.puzzle, savedObject.clues);
-		gamePuzzle.setData(savedObject.data);
+		puzzle = new Puzzle(savedObject.puzzle, savedObject.clues);
+		puzzle.setData(savedObject.data);
 
 	};
 
@@ -318,6 +430,19 @@
 
 	};
 
-	document.body.appendChild(gamePuzzle.toHTML());
+	game.add(puzzle);
+
+	renderer.setScene(game);
+
+	renderer.onFrameChange = function() {
+
+
+
+	};
+
+	// renderer.start();
+	renderer.render();
+
+	renderer.appendTo(document.body);
 
 })();
