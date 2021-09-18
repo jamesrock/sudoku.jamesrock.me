@@ -47,36 +47,6 @@
 			offset = 100,
 			context = renderer.context;
 
-			// while(boxCount--) {
-			while(false) {
-
-				box = this.boxes[boxCount];
-				boxPoints = box.length;
-
-				console.log('boxPoints', boxPoints);
-
-				// context.moveTo(box[0][0], box[0][1]);
-
-				// context.beginPath();
-
-				while(boxPoints--) {
-
-					boxPoint = box[boxPoints];
-
-					// context.moveTo(boxPoint[0]*boxSize, boxPoint[1]*boxSize);
-
-					context.lineTo(boxPoint[0]*boxSize, boxPoint[1]*boxSize);
-					context.stroke();
-					// context.closePath();
-
-					// console.log(boxPoints[0]*boxSize, boxPoints[1]*boxSize);
-
-				};
-
-				console.log(boxCount);
-
-			};
-
 			context.lineWidth = 2;
 			context.lineCap = 'round';
 
