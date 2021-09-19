@@ -498,7 +498,7 @@
 
 		var puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
 
-		puzzleIndex = 2;
+		puzzleIndex = 3;
 
 		puzzle = new Puzzle(puzzles[puzzleIndex]);
 		localStorage.removeItem(namespace);
