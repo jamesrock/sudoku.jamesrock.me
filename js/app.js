@@ -14,8 +14,8 @@
 				[[1, 6], [4, 6], [4, 8], [3, 8], [3, 9], [0, 9], [0, 8], [1, 8], [1, 6]],
 				[[3, 8], [6, 8], [6, 7], [9, 7], [9, 9], [3, 9], [3, 8]]
 			], // boxes
-			[], // numbers
-			[]  // clues
+			[2, 7, 6, 8, 9, 1, 5, 3, 4, 8, 1, 9, 5, 3, 4, 6, 2, 7, 7, 3, 8, 4, 2, 5, 9, 1, 6, 9, 5, 2, 3, 7, 8, 4, 6, 1, 3, 2, 4, 1, 8, 6, 7, 9, 5, 1, 4, 7, 9, 6, 3, 8, 5, 2, 5, 6, 1, 7, 4, 9, 2, 8, 3, 6, 9, 5, 2, 1, 7, 3, 4, 8, 4, 8, 3, 6, 5, 2, 1, 7, 9], // numbers
+			[0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0]  // clues
 		]
 	],
 	colours = [
@@ -25,223 +25,6 @@
 		complete: 'well done!',
 		newgame: 'start a new game?'
 	};
-
-	var Puzzle = ROCK.Object.extend({
-		constructor: function Puzzle(puzzle) {
-
-			this.squares = [];
-			this.boxes = puzzle[0];
-			this.numbers = puzzle[1];
-			this.clues = puzzle[2];
-
-		},
-		render: function(renderer) {
-
-			var
-			boxes = this.boxes,
-			boxCount = 0,
-			box = boxes[boxCount],
-			boxPoints = 0,
-			boxPoint,
-			boxSize = 50,
-			offset = 100,
-			context = renderer.context;
-
-			context.lineWidth = 2;
-			context.lineCap = 'round';
-
-			// renderer.node.addEventListener('click', function() {
-			setInterval(function() {
-
-				if(boxCount===boxes.length) {
-
-					return;
-
-				};
-
-				boxPoint = box[boxPoints];
-
-				if(boxPoints===0) {
-
-					context.beginPath();
-					context.moveTo((boxPoint[0]*boxSize)+offset, (boxPoint[1]*boxSize)+offset);
-					context.fillStyle = 'rgb(' + colours[boxCount].join(', ') + ')';
-					console.log(box);
-
-				}
-				else {
-
-					context.lineTo((boxPoint[0]*boxSize)+offset, (boxPoint[1]*boxSize)+offset);
-
-				};
-
-				console.log(boxPoint);
-
-				boxPoints ++;
-
-				if(boxPoints===box.length) {
-
-					boxCount ++;
-					box = boxes[boxCount];
-					boxPoints = 0;
-
-					context.fill();
-					context.stroke();
-					context.closePath();
-
-				};
-
-			}, 50);
-
-			// });
-
-		},
-		validate: function() {
-
-			var
-			wrong = 0;
-
-			this.forEachSquare(function(square) {
-
-				if(!(square.displayValue===square.value)) {
-
-					wrong ++;
-
-				};
-
-			});
-
-			// return wrong;
-			return wrong===0;
-
-		},
-		forEachSquare: function(callback) {
-
-			this.squares.forEach(function(square) {
-
-				square.squares.forEach(function(squareSquare) {
-
-					callback(squareSquare);
-
-				});
-
-			});
-
-			return this;
-
-		},
-		squareCount: 9,
-		item: 0
-	});
-
-	var Scene = ROCK.Object.extend({
-		constructor: function Scene() {
-
-			this.children = [];
-
-		},
-		add: function(child) {
-
-			this.children.push(child);
-			child.scene = this;
-			child.z = this.children.length;
-
-		}
-	});
-
-	var Renderer = ROCK.Object.extend({
-		constructor: function Renderer(width, height, scale) {
-
-			this.width = width;
-			this.height = height;
-			this.scale = scale;
-
-			// console.log('new Renderer()', this, arguments);
-
-			this.node = document.createElement('canvas');
-			this.context = this.node.getContext(this.type);
-
-			this.node.width = (this.width);
-			this.node.height = (this.height);
-
-			this.node.style.width = (this.width + 'px');
-			this.node.style.height = (this.height + 'px');
-
-		},
-		render: function() {
-
-			var
-			childrenCount = this.scene.children.length,
-			_this = this;
-
-			this.scene.renderer = this;
-
-			// clear
-			this.node.width = this.width;
-
-			for(var i=0;i<childrenCount;i++) {
-
-				this.scene.children[i].render(_this);
-
-			};
-
-			return this;
-
-		},
-		appendTo: function(child) {
-
-			child.appendChild(this.node);
-			return this;
-
-		},
-		start: function() {
-
-			var
-			_this = this;
-
-			this.frame = requestAnimationFrame(function() {
-
-				_this.start();
-
-			});
-
-			this.render();
-
-			if(this.paused) {
-
-				return this;
-
-			};
-
-			this.onFrameChange.call(this);
-
-			return this;
-
-		},
-		stop: function() {
-
-			cancelAnimationFrame(this.frame);
-			return this;
-
-		},
-		setScene: function(scene) {
-
-			this.scene = scene;
-			return this;
-
-		},
-		pause: function() {
-
-			this.paused = !this.paused;
-			return this;
-
-		},
-		type: '2d',
-		scene: null,
-		scale: 1,
-		frame: 0,
-		paused: false
-	});
 
 	var DisplayObject = ROCK.Object.extend({
 		x: 0,
@@ -331,7 +114,360 @@
 			this[prop] += value;
 			return this[prop];
 
+		},
+		scale: 1
+	});
+
+	var Circle = DisplayObject.extend({
+		constructor: function Circle(fill, radius, x, y) {
+
+			this.fill = fill;
+			this.x = x;
+			this.y = y;
+			this.radius = radius;
+
+		},
+		render: function(renderer) {
+
+			if(!this.visible) {
+				return;
+			};
+
+			renderer.context.save();
+			renderer.context.scale(this.scale, this.scale);
+			renderer.context.translate(this.x, this.y);
+			renderer.context.globalAlpha = this.opacity;
+			renderer.context.fillStyle = this.fill;
+			renderer.context.beginPath();
+			renderer.context.arc(0, 0, this.radius, 0, 2*Math.PI);
+			renderer.context.closePath();
+			renderer.context.fill();
+			renderer.context.restore();
+
+			this.renderer = renderer;
+
+		},
+		hitTest: function(rect) {
+
+			var
+			deltax = (this.x - Math.max(rect.x, Math.min(this.x, (rect.x + rect.width)))),
+			deltay = (this.y - Math.max(rect.y, Math.min(this.y, (rect.y + rect.height))));
+
+			return ((deltax * deltax) + (deltay * deltay)) < (this.radius * this.radius);
+
 		}
+	});
+
+	var PuzzleTile = DisplayObject.extend({
+		constructor: function PuzzleTile(name, width, height, x, y, clue, correct) {
+
+			this.name = name;
+			this.x = x;
+			this.y = y;
+			this.width = width;
+			this.height = height;
+			this.clue = clue;
+			this.correct = correct;
+
+		},
+		render: function(renderer) {
+
+			renderer.context.imageSmoothingEnabled = false;
+			renderer.context.save();
+			renderer.context.scale(this.scale, this.scale);
+			renderer.context.translate(this.x*50+100, this.y*50+100);
+			if(this.rotation) {
+				renderer.context.rotate(this.rotation*Math.PI/180);
+			};
+			renderer.context.globalAlpha = this.opacity;
+			renderer.context.font = '34px Helvetica';
+			renderer.context.fillStyle = 'rgb(0, 0, 0)';
+
+			var xAlign = (50/2)-10;
+			var yAlign = (50/2)+11;
+
+			if(this.clue) {
+				renderer.context.fillText(this.correct, xAlign, yAlign);
+			}
+			else {
+				renderer.context.fillText(this.frame===0?'':this.frame, xAlign, yAlign);
+			};
+
+			renderer.context.restore();
+
+			this.renderer = renderer;
+
+		},
+		nextFrame: function() {
+
+			if(this.frame<(this.maxFrames)) {
+				this.frame ++;
+			}
+			else {
+				this.frame = 0;
+			};
+
+		},
+		frame: 0,
+		maxFrames: 9,
+		clue: false,
+		correct: 9
+	});
+
+	var Puzzle = ROCK.Object.extend({
+		constructor: function Puzzle(puzzle) {
+
+			this.tiles = [];
+			this.boxes = puzzle[0];
+			this.numbers = puzzle[1];
+			this.clues = puzzle[2];
+
+			var inc;
+
+			for(var col=0;col<9;col++) {
+
+				for(var row=0;row<9;row++) {
+
+					// console.log(row, col);
+
+					inc = this.tiles.length;
+
+					this.tiles.push(new PuzzleTile([row, col].join(''), 50, 50, row, col, !!this.clues[inc], this.numbers[inc]));
+
+				}
+			}
+
+			console.log(this.tiles);
+
+		},
+		render: function(renderer) {
+
+			var
+			_this = this,
+			boxes = this.boxes,
+			boxCount = 0,
+			box = boxes[boxCount],
+			boxPoints = 0,
+			boxPoint,
+			boxSize = 50,
+			offset = 100,
+			context = renderer.context,
+			rowsAndCols = 8,
+			interval;
+
+			context.lineCap = 'round';
+			context.lineWidth = 3;
+
+			interval = setInterval(function() {
+
+				if(boxCount===boxes.length) {
+
+					context.lineWidth = 1;
+
+					for(var row=1; row<=rowsAndCols; row++) {
+
+						context.moveTo(offset, (row*boxSize)+offset);
+						context.lineTo((boxSize*9)+offset, (row*boxSize)+offset);
+
+					};
+
+					for(var col=1; col<=rowsAndCols; col++) {
+
+						context.moveTo((col*boxSize)+offset, offset);
+						context.lineTo((col*boxSize)+offset, (boxSize*9)+offset);
+
+					};
+
+					context.stroke();
+
+					for(var tile=0; tile<_this.tiles.length; tile++) {
+
+						_this.tiles[tile].render(renderer);
+
+					};
+
+					clearInterval(interval);
+
+					return;
+
+				};
+
+				boxPoint = box[boxPoints];
+
+				if(boxPoints===0) {
+
+					context.beginPath();
+					context.moveTo((boxPoint[0]*boxSize)+offset, (boxPoint[1]*boxSize)+offset);
+					context.fillStyle = 'rgb(' + colours[boxCount].join(', ') + ')';
+					// console.log(box);
+
+				}
+				else {
+
+					context.lineTo((boxPoint[0]*boxSize)+offset, (boxPoint[1]*boxSize)+offset);
+
+				};
+
+				// console.log(boxPoint);
+
+				boxPoints ++;
+
+				if(boxPoints===box.length) {
+
+					boxCount ++;
+					box = boxes[boxCount];
+					boxPoints = 0;
+
+					context.fill();
+					context.stroke();
+					context.closePath();
+
+				};
+
+			}, 10);
+
+		},
+		validate: function() {
+
+			var
+			wrong = 0;
+
+			this.forEachSquare(function(square) {
+
+				if(!(square.displayValue===square.value)) {
+
+					wrong ++;
+
+				};
+
+			});
+
+			// return wrong;
+			return wrong===0;
+
+		},
+		forEachSquare: function(callback) {
+
+			this.squares.forEach(function(square) {
+
+				square.squares.forEach(function(squareSquare) {
+
+					callback(squareSquare);
+
+				});
+
+			});
+
+			return this;
+
+		}
+	});
+
+	var Scene = ROCK.Object.extend({
+		constructor: function Scene() {
+
+			this.children = [];
+
+		},
+		add: function(child) {
+
+			this.children.push(child);
+			child.scene = this;
+			child.z = this.children.length;
+
+		}
+	});
+
+	var Renderer = ROCK.Object.extend({
+		constructor: function Renderer(width, height, scale) {
+
+			this.width = width;
+			this.height = height;
+
+			// console.log('new Renderer()', this, arguments);
+
+			this.node = document.createElement('canvas');
+			this.context = this.node.getContext(this.type);
+
+			this.node.width = (this.width);
+			this.node.height = (this.height);
+
+			this.node.style.width = (this.width + 'px');
+			this.node.style.height = (this.height + 'px');
+
+		},
+		render: function() {
+
+			var
+			childrenCount = this.scene.children.length,
+			_this = this;
+
+			this.scene.renderer = this;
+
+			// clear
+			this.node.width = this.width;
+
+			for(var i=0;i<childrenCount;i++) {
+
+				this.scene.children[i].render(_this);
+
+			};
+
+			return this;
+
+		},
+		appendTo: function(child) {
+
+			child.appendChild(this.node);
+			return this;
+
+		},
+		start: function() {
+
+			var
+			_this = this;
+
+			this.frame = requestAnimationFrame(function() {
+
+				_this.start();
+
+			});
+
+			this.render();
+
+			if(this.paused) {
+
+				return this;
+
+			};
+
+			this.onFrameChange.call(this);
+
+			return this;
+
+		},
+		stop: function() {
+
+			cancelAnimationFrame(this.frame);
+			return this;
+
+		},
+		setScene: function(scene) {
+
+			this.scene = scene;
+			return this;
+
+		},
+		pause: function() {
+
+			this.paused = !this.paused;
+			return this;
+
+		},
+		type: '2d',
+		scene: null,
+		frame: 0,
+		paused: false
 	});
 
 	var
@@ -341,7 +477,7 @@
 	savedObject,
 	width = 500,
 	height = 500,
-	scale = 10,
+	scale = 1,
 	game = new Scene(),
 	renderer = new Renderer(1000, 1000, scale),
 	puzzle,
