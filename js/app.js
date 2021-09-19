@@ -53,8 +53,6 @@
 		opacity: 1,
 		bind: function(event, handler) {
 
-			// console.log(this);
-
 			var
 			sprite = this,
 			handlerProxy = function(e) {
@@ -110,8 +108,6 @@
 
 		},
 		unbind: function(event, handler) {
-
-			// console.log('unbind()', events[this.name]);
 
 			var
 			obj = events[this.name].filter(function(e) {
@@ -191,8 +187,6 @@
 			for(var col=0;col<9;col++) {
 
 				for(var row=0;row<9;row++) {
-
-					// console.log(row, col);
 
 					inc = this.tiles.length;
 
