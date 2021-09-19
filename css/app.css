@@ -6,4 +6,5 @@
 body {
 	font-family: sans-serif;
 	background-color: rgb(98, 181, 173);
+	cursor: pointer;
 }
