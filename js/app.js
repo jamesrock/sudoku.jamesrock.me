@@ -14,10 +14,12 @@
 		var
 		boxSize = 50,
 		offsetSize = 100,
+		textSize = 34,
 		screenWidth = window.innerWidth;
 
 		if(screenWidth<=375) {
 			offsetSize = 11;
+			textSize = 30;
 			boxSize = ((screenWidth - (offsetSize*2)) / 9);
 		}
 		else if(screenWidth<=414) {
@@ -29,7 +31,8 @@
 
 		return {
 			box: boxSize,
-			offset: offsetSize
+			offset: offsetSize,
+			text: textSize
 		};
 
 	},
@@ -169,14 +172,15 @@
 	});
 
 	var Puzzle = DisplayObject.extend({
-		constructor: function Puzzle(puzzle, boxSize, offset) {
+		constructor: function Puzzle(puzzle, sizes) {
 
 			this.tiles = [];
 			this.boxes = puzzle[0];
 			this.numbers = puzzle[1];
 			this.clues = puzzle[2];
-			this.boxSize = boxSize;
-			this.offset = offset;
+			this.boxSize = sizes.box;
+			this.offset = sizes.offset;
+			this.text = sizes.text;
 
 			var
 			inc,
@@ -331,22 +335,23 @@
 			var
 			boxSize = this.puzzle.boxSize,
 			offset = this.puzzle.offset,
+			text = this.puzzle.text,
 			renderer = this.puzzle.scene.renderer,
-			context = renderer.context;
+			context = renderer.context,
+			xAlign = ((boxSize/2)),
+			yAlign = ((boxSize/2));
 
-			context.imageSmoothingEnabled = false;
 			context.save();
 			context.scale(this.scale, this.scale);
 			context.translate(this.x, this.y);
 			if(this.rotation) {
 				context.rotate(this.rotation*Math.PI/180);
 			};
+			context.textAlign = 'center';
+			context.textBaseline = 'middle';
 			context.globalAlpha = this.opacity;
-			context.font = '34px Helvetica';
+			context.font = `${text}px Helvetica`;
 			context.fillStyle = 'rgb(0, 0, 0)';
-
-			var xAlign = (boxSize/2)-9;
-			var yAlign = (boxSize/2)+11;
 
 			if(this.clue) {
 				context.fillText(this.correct, xAlign, yAlign);
@@ -529,9 +534,9 @@
 
 		var puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
 
-		// puzzleIndex = 3;
+		puzzleIndex = 3;
 
-		puzzle = new Puzzle(puzzles[puzzleIndex], boxSize, offset);
+		puzzle = new Puzzle(puzzles[puzzleIndex], sizes);
 		localStorage.removeItem(namespace);
 
 	},
@@ -539,7 +544,7 @@
 
 		savedObject = JSON.parse(savedGame);
 
-		puzzle = new Puzzle(savedObject.puzzle, boxSize, offset);
+		puzzle = new Puzzle(savedObject.puzzle, sizes);
 		puzzle.setData(savedObject.data);
 
 	};
