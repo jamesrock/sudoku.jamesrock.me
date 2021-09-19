@@ -19,10 +19,10 @@
 		height: 0,
 		rotation: 0,
 		visible: true,
-		xOffset: 0,
-		yOffset: 0,
 		opacity: 1,
 		bind: function(event, handler) {
+
+			console.log(this);
 
 			var
 			sprite = this,
@@ -106,24 +106,26 @@
 			this.radius = radius;
 
 		},
-		render: function(renderer) {
+		render: function() {
 
 			if(!this.visible) {
 				return;
 			};
 
-			renderer.context.save();
-			renderer.context.scale(this.scale, this.scale);
-			renderer.context.translate(this.x, this.y);
-			renderer.context.globalAlpha = this.opacity;
-			renderer.context.fillStyle = this.fill;
-			renderer.context.beginPath();
-			renderer.context.arc(0, 0, this.radius, 0, 2*Math.PI);
-			renderer.context.closePath();
-			renderer.context.fill();
-			renderer.context.restore();
+			var
+			renderer = this.scene.renderer,
+			context = renderer.context;
 
-			this.renderer = renderer;
+			context.save();
+			context.scale(this.scale, this.scale);
+			context.translate(this.x, this.y);
+			context.globalAlpha = this.opacity;
+			context.fillStyle = this.fill;
+			context.beginPath();
+			context.arc(0, 0, this.radius, 0, 2*Math.PI);
+			context.closePath();
+			context.fill();
+			context.restore();
 
 		},
 		hitTest: function(rect) {
@@ -137,83 +139,7 @@
 		}
 	});
 
-	var PuzzleTile = DisplayObject.extend({
-		constructor: function PuzzleTile(name, width, height, x, y, clue, correct) {
-
-			this.name = name;
-			this.x = x;
-			this.y = y;
-			this.width = width;
-			this.height = height;
-			this.clue = clue;
-			this.correct = correct;
-
-			if(clue) {
-				this.value = this.correct;
-			};
-
-		},
-		render: function(renderer) {
-
-			var
-			boxSize = this.puzzle.boxSize,
-			offset = this.puzzle.offset,
-			context = renderer.context;
-
-			context.imageSmoothingEnabled = false;
-			context.save();
-			context.scale(this.scale, this.scale);
-			context.translate(this.x, this.y);
-			if(this.rotation) {
-				context.rotate(this.rotation*Math.PI/180);
-			};
-			context.globalAlpha = this.opacity;
-			context.font = '34px Helvetica';
-			context.fillStyle = 'rgb(0, 0, 0)';
-
-			var xAlign = (boxSize/2)-10;
-			var yAlign = (boxSize/2)+11;
-
-			if(this.clue) {
-				context.fillText(this.correct, xAlign, yAlign);
-			}
-			else {
-				context.fillText(this.value===0?'':this.value, xAlign, yAlign);
-			};
-
-			context.restore();
-
-		},
-		cycle: function() {
-
-			if(this.value<(this.maxValue)) {
-				this.value ++;
-			}
-			else {
-				this.value = 0;
-			};
-
-		},
-		check: function() {
-
-			var _return = false;
-
-			if(this.value===this.correct) {
-
-				_return = true;
-
-			};
-
-			return _return;
-
-		},
-		value: 0,
-		maxValue: 9,
-		clue: false,
-		correct: 9
-	});
-
-	var Puzzle = ROCK.Object.extend({
+	var Puzzle = DisplayObject.extend({
 		constructor: function Puzzle(puzzle) {
 
 			this.tiles = [];
@@ -253,10 +179,10 @@
 
 			};
 
-			console.log(this.tiles);
+			console.log(this);
 
 		},
-		render: function(renderer) {
+		render: function() {
 
 			var
 			_this = this,
@@ -323,7 +249,7 @@
 
 			for(var tile=0; tile<_this.tiles.length; tile++) {
 
-				_this.tiles[tile].render(renderer);
+				_this.tiles[tile].render();
 
 			};
 
@@ -348,12 +274,90 @@
 		},
 		addTile: function(tile) {
 
-			tile.puzzle = this;
+			tile.puzzle = tile.parent = this;
+
 			this.tiles.push(tile);
 
 		},
 		boxSize: 50,
 		offset: 100
+	});
+
+	var PuzzleTile = DisplayObject.extend({
+		constructor: function PuzzleTile(name, width, height, x, y, clue, correct) {
+
+			this.name = name;
+			this.x = x;
+			this.y = y;
+			this.width = width;
+			this.height = height;
+			this.clue = clue;
+			this.correct = correct;
+
+			if(clue) {
+				this.value = this.correct;
+			};
+
+		},
+		render: function() {
+
+			var
+			boxSize = this.puzzle.boxSize,
+			offset = this.puzzle.offset,
+			renderer = this.puzzle.scene.renderer,
+			context = renderer.context;
+
+			context.imageSmoothingEnabled = false;
+			context.save();
+			context.scale(this.scale, this.scale);
+			context.translate(this.x, this.y);
+			if(this.rotation) {
+				context.rotate(this.rotation*Math.PI/180);
+			};
+			context.globalAlpha = this.opacity;
+			context.font = '34px Helvetica';
+			context.fillStyle = 'rgb(0, 0, 0)';
+
+			var xAlign = (boxSize/2)-10;
+			var yAlign = (boxSize/2)+11;
+
+			if(this.clue) {
+				context.fillText(this.correct, xAlign, yAlign);
+			}
+			else {
+				context.fillText(this.value===0?'':this.value, xAlign, yAlign);
+			};
+
+			context.restore();
+
+		},
+		cycle: function() {
+
+			if(this.value<(this.maxValue)) {
+				this.value ++;
+			}
+			else {
+				this.value = 0;
+			};
+
+		},
+		check: function() {
+
+			var _return = false;
+
+			if(this.value===this.correct) {
+
+				_return = true;
+
+			};
+
+			return _return;
+
+		},
+		value: 0,
+		maxValue: 9,
+		clue: false,
+		correct: 9
 	});
 
 	var Scene = ROCK.Object.extend({
@@ -395,14 +399,12 @@
 			childrenCount = this.scene.children.length,
 			_this = this;
 
-			this.scene.renderer = this;
-
 			// clear
 			this.node.width = this.width;
 
 			for(var i=0;i<childrenCount;i++) {
 
-				this.scene.children[i].render(_this);
+				this.scene.children[i].render();
 
 			};
 
@@ -446,6 +448,8 @@
 
 		},
 		setScene: function(scene) {
+
+			scene.renderer = this;
 
 			this.scene = scene;
 			return this;
@@ -495,7 +499,7 @@
 
 		var puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
 
-		puzzleIndex = 3;
+		// puzzleIndex = 3;
 
 		puzzle = new Puzzle(puzzles[puzzleIndex]);
 		localStorage.removeItem(namespace);
@@ -505,7 +509,7 @@
 
 		savedObject = JSON.parse(savedGame);
 
-		puzzle = new Puzzle(savedObject.puzzle, savedObject.clues);
+		puzzle = new Puzzle(savedObject.puzzle);
 		puzzle.setData(savedObject.data);
 
 	};
@@ -536,7 +540,7 @@
 
 	renderer.onFrameChange = function() {
 
-
+		// unsure
 
 	};
 
