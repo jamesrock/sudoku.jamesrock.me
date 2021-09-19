@@ -31,7 +31,16 @@
 		};
 
 	},
-	isTouch = ('ontouchstart' in window);
+	isTouch = ('ontouchstart' in window),
+	touchStartEvent = 'touchstart',
+	touchEndEvent = 'touchend';
+
+	if(!isTouch) {
+
+		touchStartEvent = 'mousedown';
+		touchEndEvent = 'mouseup';
+
+	};
 
 	var DisplayObject = ROCK.Object.extend({
 		x: 0,
@@ -190,7 +199,7 @@
 					tile = new PuzzleTile([row, col].join(''), boxSize, boxSize, (row*boxSize)+offset, (col*boxSize)+offset, !!this.clues[inc], this.numbers[inc]);
 
 					if(!this.clues[inc]) {
-						tile.bind('click', function() {
+						tile.bind(touchStartEvent, function() {
 
 							this.cycle();
 							saveGame();
