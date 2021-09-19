@@ -183,7 +183,7 @@
 
 					inc = this.tiles.length;
 
-					tile = new PuzzleTile([row, col].join(''), 50, 50, (row*boxSize)+offset, (col*boxSize)+offset, !!this.clues[inc], this.numbers[inc]);
+					tile = new PuzzleTile([row, col].join(''), boxSize, boxSize, (row*boxSize)+offset, (col*boxSize)+offset, !!this.clues[inc], this.numbers[inc]);
 
 					if(!this.clues[inc]) {
 						tile.bind('click', function() {
