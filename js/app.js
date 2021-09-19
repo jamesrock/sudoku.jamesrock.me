@@ -496,7 +496,11 @@
 	},
 	startNewGame = function() {
 
-		puzzle = new Puzzle(puzzles[ROCK.MATH.random(0, puzzles.length-1)]);
+		var puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
+
+		puzzleIndex = 2;
+
+		puzzle = new Puzzle(puzzles[puzzleIndex]);
 		localStorage.removeItem(namespace);
 
 	},
