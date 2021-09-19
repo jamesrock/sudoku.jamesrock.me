@@ -61,8 +61,6 @@
 					return;
 				};
 
-				console.log(e);
-
 				var
 				touch,
 				touchX,
@@ -82,8 +80,6 @@
 					touchY = touch.offsetY;
 
 				};
-
-				console.log(touch, touchX, touchY, e);
 
 				if(new Circle('red', 3, touchX, touchY).hitTest(sprite)) {
 
