@@ -9,6 +9,28 @@
 		continue: 'continue saved game?'
 	},
 	events = {},
+	getSizes = function() {
+
+		var
+		boxSize = 50,
+		offsetSize = 100,
+		screenWidth = window.innerWidth;
+
+		if(screenWidth<=375) {
+			offsetSize = 10;
+			boxSize = ((screenWidth - (offsetSize*2)) / 9);
+		}
+		else if(screenWidth<=414) {
+			offsetSize = 20;
+			boxSize = ((screenWidth - (offsetSize*2)) / 9);
+		};
+
+		return {
+			box: boxSize,
+			offset: offsetSize
+		};
+
+	},
 	isTouch = ('ontouchstart' in window);
 
 	var DisplayObject = ROCK.Object.extend({
@@ -22,7 +44,7 @@
 		opacity: 1,
 		bind: function(event, handler) {
 
-			console.log(this);
+			// console.log(this);
 
 			var
 			sprite = this,
@@ -52,7 +74,7 @@
 
 				};
 
-				if(new Circle('red', 2, touchX, touchY).hitTest(sprite)) {
+				if(new Circle('red', 1, touchX, touchY).hitTest(sprite)) {
 
 					handler.call(sprite, e, touchX, touchY);
 
@@ -140,18 +162,18 @@
 	});
 
 	var Puzzle = DisplayObject.extend({
-		constructor: function Puzzle(puzzle) {
+		constructor: function Puzzle(puzzle, boxSize, offset) {
 
 			this.tiles = [];
 			this.boxes = puzzle[0];
 			this.numbers = puzzle[1];
 			this.clues = puzzle[2];
+			this.boxSize = boxSize;
+			this.offset = offset;
 
 			var
 			inc,
-			tile,
-			boxSize = this.boxSize,
-			offset = this.offset;
+			tile;
 
 			for(var col=0;col<9;col++) {
 
@@ -471,6 +493,9 @@
 	namespace = 'sudoku.jamesrock.me',
 	savedGame = localStorage.getItem(namespace),
 	savedObject,
+	sizes = getSizes(),
+	boxSize = sizes.box,
+	offset = sizes.offset,
 	game = new Scene(),
 	renderer = new Renderer(window.innerWidth, window.innerHeight),
 	puzzle,
@@ -501,7 +526,7 @@
 
 		// puzzleIndex = 3;
 
-		puzzle = new Puzzle(puzzles[puzzleIndex]);
+		puzzle = new Puzzle(puzzles[puzzleIndex], boxSize, offset);
 		localStorage.removeItem(namespace);
 
 	},
@@ -509,7 +534,7 @@
 
 		savedObject = JSON.parse(savedGame);
 
-		puzzle = new Puzzle(savedObject.puzzle);
+		puzzle = new Puzzle(savedObject.puzzle, boxSize, offset);
 		puzzle.setData(savedObject.data);
 
 	};
