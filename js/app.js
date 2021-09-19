@@ -372,7 +372,7 @@
 	});
 
 	var Renderer = ROCK.Object.extend({
-		constructor: function Renderer(width, height, scale) {
+		constructor: function Renderer(width, height) {
 
 			this.width = width;
 			this.height = height;
@@ -467,11 +467,8 @@
 	namespace = 'sudoku.jamesrock.me',
 	savedGame = localStorage.getItem(namespace),
 	savedObject,
-	width = 500,
-	height = 500,
-	scale = 1,
 	game = new Scene(),
-	renderer = new Renderer(1000, 1000, scale),
+	renderer = new Renderer(window.innerWidth, window.innerHeight),
 	puzzle,
 	saveGame = function() {
 
