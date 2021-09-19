@@ -25,6 +25,8 @@
 			boxSize = ((screenWidth - (offsetSize*2)) / 9);
 		};
 
+		boxSize = (boxSize*1|0);
+
 		return {
 			box: boxSize,
 			offset: offsetSize
