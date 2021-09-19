@@ -16,8 +16,6 @@
 		offsetSize = 100,
 		screenWidth = window.innerWidth;
 
-		alert(screenWidth);
-
 		if(screenWidth<=375) {
 			offsetSize = 10;
 			boxSize = ((screenWidth - (offsetSize*2)) / 9);
@@ -76,7 +74,7 @@
 
 				};
 
-				if(new Circle('red', 1, touchX, touchY).hitTest(sprite)) {
+				if(new Circle('red', 5, touchX, touchY).hitTest(sprite)) {
 
 					handler.call(sprite, e, touchX, touchY);
 
