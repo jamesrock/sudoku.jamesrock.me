@@ -74,6 +74,8 @@
 
 				};
 
+				console.log(touch, touchX, touchY);
+
 				if(new Circle('red', 3, touchX, touchY).hitTest(sprite)) {
 
 					handler.call(sprite, e, touchX, touchY);
