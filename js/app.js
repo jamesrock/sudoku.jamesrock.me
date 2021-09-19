@@ -74,7 +74,7 @@
 
 				};
 
-				if(new Circle('red', 5, touchX, touchY).hitTest(sprite)) {
+				if(new Circle('red', 3, touchX, touchY).hitTest(sprite)) {
 
 					handler.call(sprite, e, touchX, touchY);
 
