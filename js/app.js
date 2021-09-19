@@ -14,20 +14,27 @@
 		var
 		boxSize = 50,
 		offsetSize = 100,
-		textSize = 34,
+		textSize = 46,
 		screenWidth = window.innerWidth;
 
-		if(screenWidth<=375) {
+		if(screenWidth<=320) {
 			offsetSize = 11;
-			textSize = 30;
-			boxSize = ((screenWidth - (offsetSize*2)) / 9);
+		}
+		else if(screenWidth<=375) {
+			offsetSize = 11;
 		}
 		else if(screenWidth<=414) {
 			offsetSize = 20;
+		};
+
+		if(screenWidth<=414) {
 			boxSize = ((screenWidth - (offsetSize*2)) / 9);
 		};
 
 		boxSize = (boxSize*1|0);
+		textSize = (boxSize-1);
+
+		// console.log(boxSize, textSize);
 
 		return {
 			box: boxSize,
