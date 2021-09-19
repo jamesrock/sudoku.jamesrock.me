@@ -16,6 +16,8 @@
 		offsetSize = 100,
 		screenWidth = window.innerWidth;
 
+		alert(screenWidth);
+
 		if(screenWidth<=375) {
 			offsetSize = 10;
 			boxSize = ((screenWidth - (offsetSize*2)) / 9);
