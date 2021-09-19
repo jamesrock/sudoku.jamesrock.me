@@ -345,7 +345,7 @@
 			context.font = '34px Helvetica';
 			context.fillStyle = 'rgb(0, 0, 0)';
 
-			var xAlign = (boxSize/2)-10;
+			var xAlign = (boxSize/2)-9;
 			var yAlign = (boxSize/2)+11;
 
 			if(this.clue) {
