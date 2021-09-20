@@ -524,7 +524,7 @@
 	game = new Scene(),
 	renderer = new Renderer(window.innerWidth, window.innerHeight),
 	puzzle,
-	puzzleIndex = 3,
+	puzzleIndex = (puzzles.length-1),
 	saveGame = function() {
 
 		var
@@ -546,7 +546,7 @@
 	},
 	startNewGame = function() {
 
-		puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
+		// puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
 		puzzle = new Puzzle(puzzles[puzzleIndex], sizes);
 		localStorage.removeItem(namespace);
 
