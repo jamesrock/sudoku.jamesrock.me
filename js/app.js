@@ -546,7 +546,7 @@
 	},
 	startNewGame = function() {
 
-		// puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
+		puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
 		puzzle = new Puzzle(puzzles[puzzleIndex], sizes);
 		localStorage.removeItem(namespace);
 
