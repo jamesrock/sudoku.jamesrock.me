@@ -317,6 +317,31 @@
 			this.tiles.push(tile);
 
 		},
+		getValues: function() {
+
+			var
+			output = [];
+
+			this.tiles.forEach(function(item) {
+
+				output.push(item.value);
+
+			});
+
+			return output;
+
+		},
+		setValues: function(values) {
+
+			this.tiles.forEach(function(item, index) {
+
+				console.log(item, index);
+
+				item.value = values[index];
+
+			});
+
+		},
 		boxSize: 50,
 		offset: 100
 	});
@@ -516,17 +541,16 @@
 	game = new Scene(),
 	renderer = new Renderer(window.innerWidth, window.innerHeight),
 	puzzle,
+	puzzleIndex = 3,
 	saveGame = function() {
 
-		console.log('saveGame');
+		var
+		saveObject = {
+			puzzle: puzzleIndex,
+			values: puzzle.getValues()
+		};
 
-		// var
-		// saveObject = {
-		// 	puzzle: puzzle.puzzle,
-		// 	data: puzzle.getData()
-		// };
-		//
-		// localStorage.setItem(namespace, JSON.stringify(saveObject));
+		localStorage.setItem(namespace, JSON.stringify(saveObject));
 
 		if(puzzle.check()) {
 
@@ -539,10 +563,7 @@
 	},
 	startNewGame = function() {
 
-		var puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
-
-		puzzleIndex = 3;
-
+		puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
 		puzzle = new Puzzle(puzzles[puzzleIndex], sizes);
 		localStorage.removeItem(namespace);
 
@@ -550,9 +571,9 @@
 	openSavedGame = function() {
 
 		savedObject = JSON.parse(savedGame);
-
-		puzzle = new Puzzle(savedObject.puzzle, sizes);
-		puzzle.setData(savedObject.data);
+		puzzleIndex = savedObject.puzzle;
+		puzzle = new Puzzle(puzzles[puzzleIndex], sizes);
+		puzzle.setValues(savedObject.values);
 
 	};
 
