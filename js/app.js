@@ -1,60 +1,7 @@
 (function() {
 
 	var
-	colours = [
-		[199, 217, 140], [229, 205, 239], [192, 230, 250], [188, 223, 199], [212, 208, 241], [250, 216, 234], [247, 214, 193], [255, 251, 196], [197, 210, 244]
-	],
-	strings = {
-		complete: 'well done!',
-		continue: 'continue saved game?'
-	},
-	events = {},
-	getSizes = function() {
-
-		var
-		boxSize = 50,
-		offsetSize = 100,
-		textSize = 46,
-		screenWidth = window.innerWidth;
-
-		if(screenWidth<=320) {
-			offsetSize = 11;
-		}
-		else if(screenWidth<=375) {
-			offsetSize = 11;
-		}
-		else if(screenWidth<=414) {
-			offsetSize = 20;
-		};
-
-		if(screenWidth<=414) {
-			boxSize = ((screenWidth - (offsetSize*2)) / 9);
-		};
-
-		boxSize = (boxSize*1|0);
-		textSize = (boxSize-1);
-
-		// console.log(boxSize, textSize);
-
-		return {
-			box: boxSize,
-			offset: offsetSize,
-			text: textSize
-		};
-
-	},
-	isTouch = ('ontouchstart' in window),
-	touchStartEvent = 'touchstart',
-	touchEndEvent = 'touchend';
-
-	if(!isTouch) {
-
-		touchStartEvent = 'mousedown';
-		touchEndEvent = 'mouseup';
-
-	};
-
-	var DisplayObject = ROCK.Object.extend({
+	DisplayObject = ROCK.Object.extend({
 		x: 0,
 		y: 0,
 		z: 0,
@@ -134,9 +81,8 @@
 
 		},
 		scale: 1
-	});
-
-	var Circle = DisplayObject.extend({
+	}),
+	Circle = DisplayObject.extend({
 		constructor: function Circle(fill, radius, x, y) {
 
 			this.fill = fill;
@@ -176,9 +122,8 @@
 			return ((deltax * deltax) + (deltay * deltay)) < (this.radius * this.radius);
 
 		}
-	});
-
-	var Puzzle = DisplayObject.extend({
+	}),
+	Puzzle = DisplayObject.extend({
 		constructor: function Puzzle(puzzle, sizes) {
 
 			this.tiles = [];
@@ -335,8 +280,6 @@
 
 			this.tiles.forEach(function(item, index) {
 
-				console.log(item, index);
-
 				item.value = values[index];
 
 			});
@@ -344,9 +287,8 @@
 		},
 		boxSize: 50,
 		offset: 100
-	});
-
-	var PuzzleTile = DisplayObject.extend({
+	}),
+	PuzzleTile = DisplayObject.extend({
 		constructor: function PuzzleTile(name, width, height, x, y, clue, correct) {
 
 			this.name = name;
@@ -422,9 +364,8 @@
 		maxValue: 9,
 		clue: false,
 		correct: 9
-	});
-
-	var Scene = ROCK.Object.extend({
+	}),
+	Scene = ROCK.Object.extend({
 		constructor: function Scene() {
 
 			this.children = [];
@@ -437,9 +378,8 @@
 			child.z = this.children.length;
 
 		}
-	});
-
-	var Renderer = ROCK.Object.extend({
+	}),
+	Renderer = ROCK.Object.extend({
 		constructor: function Renderer(width, height) {
 
 			this.width = width;
@@ -529,9 +469,52 @@
 		scene: null,
 		frame: 0,
 		paused: false
-	});
+	}),
+	colours = [
+		[199, 217, 140], [229, 205, 239], [192, 230, 250], [188, 223, 199], [212, 208, 241], [250, 216, 234], [247, 214, 193], [255, 251, 196], [197, 210, 244]
+	],
+	strings = {
+		complete: 'well done!',
+		continue: 'continue saved game?'
+	},
+	events = {},
+	getSizes = function() {
 
-	var
+		var
+		boxSize = 50,
+		offsetSize = 100,
+		textSize = 46,
+		screenWidth = window.innerWidth;
+
+		if(screenWidth<=320) {
+			offsetSize = 11;
+		}
+		else if(screenWidth<=375) {
+			offsetSize = 11;
+		}
+		else if(screenWidth<=414) {
+			offsetSize = 20;
+		};
+
+		if(screenWidth<=414) {
+			boxSize = ((screenWidth - (offsetSize*2)) / 9);
+		};
+
+		boxSize = (boxSize*1|0);
+		textSize = (boxSize-1);
+
+		// console.log(boxSize, textSize);
+
+		return {
+			box: boxSize,
+			offset: offsetSize,
+			text: textSize
+		};
+
+	},
+	isTouch = ('ontouchstart' in window),
+	touchStartEvent = 'touchstart',
+	touchEndEvent = 'touchend',
 	namespace = 'sudoku.jamesrock.me',
 	savedGame = localStorage.getItem(namespace),
 	savedObject,
@@ -574,6 +557,13 @@
 		puzzleIndex = savedObject.puzzle;
 		puzzle = new Puzzle(puzzles[puzzleIndex], sizes);
 		puzzle.setValues(savedObject.values);
+
+	};
+
+	if(!isTouch) {
+
+		touchStartEvent = 'mousedown';
+		touchEndEvent = 'mouseup';
 
 	};
 
