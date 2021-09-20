@@ -146,7 +146,7 @@
 
 					tile = new PuzzleTile([row, col].join(''), boxSize, boxSize, (row*boxSize)+offset, (col*boxSize)+offset, !!this.clues[inc], this.numbers[inc]);
 
-					if(!this.clues[inc]) {
+					if(!this.clues[inc]&&!preview) {
 						tile.bind(touchStartEvent, function() {
 
 							this.cycle();
@@ -327,7 +327,7 @@
 			context.font = `${text}px Helvetica`;
 			context.fillStyle = 'rgb(0, 0, 0)';
 
-			if(this.clue) {
+			if(this.clue||preview) {
 				context.fillText(this.correct, xAlign, yAlign);
 			}
 			else {
@@ -500,7 +500,7 @@
 			boxSize = ((screenWidth - (offsetSize*2)) / 9);
 		};
 
-		boxSize = (boxSize*1|0);
+		boxSize = (boxSize|0);
 		textSize = (boxSize-1);
 
 		// console.log(boxSize, textSize);
@@ -519,6 +519,7 @@
 	savedGame = localStorage.getItem(namespace),
 	savedObject,
 	sizes = getSizes(),
+	preview = true,
 	boxSize = sizes.box,
 	offset = sizes.offset,
 	game = new Scene(),
@@ -546,7 +547,7 @@
 	},
 	startNewGame = function() {
 
-		puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
+		// puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
 		puzzle = new Puzzle(puzzles[puzzleIndex], sizes);
 		localStorage.removeItem(namespace);
 
