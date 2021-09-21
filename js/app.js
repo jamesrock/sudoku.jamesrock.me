@@ -325,7 +325,13 @@
 			context.textBaseline = 'middle';
 			context.globalAlpha = this.opacity;
 			context.font = `${text}px Helvetica`;
-			context.fillStyle = 'rgb(0, 0, 0)';
+
+			if(this.clue&&preview) {
+				context.fillStyle = 'rgb(200, 0, 0)';
+			}
+			else {
+				context.fillStyle = 'rgb(0, 0, 0)';
+			};
 
 			if(this.clue||preview) {
 				context.fillText(this.correct, xAlign, yAlign);
@@ -547,7 +553,10 @@
 	},
 	startNewGame = function() {
 
-		puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
+		if(!preview) {
+			puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
+		};
+
 		puzzle = new Puzzle(puzzles[puzzleIndex], sizes);
 		localStorage.removeItem(namespace);
 
