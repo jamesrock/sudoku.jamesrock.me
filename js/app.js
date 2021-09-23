@@ -150,6 +150,7 @@
 						tile.bind(touchStartEvent, function() {
 
 							this.cycle();
+							renderer.render();
 							saveGame();
 							console.log(this);
 
@@ -326,11 +327,21 @@
 			context.globalAlpha = this.opacity;
 			context.font = `${text}px Helvetica`;
 
-			if(this.clue&&preview) {
-				context.fillStyle = 'rgb(200, 0, 0)';
+			if(preview) {
+				if(this.clue) {
+					context.fillStyle = 'rgb(200, 0, 0)';
+				}
+				else {
+					context.fillStyle = 'rgb(0, 0, 0)';
+				};
 			}
 			else {
-				context.fillStyle = 'rgb(0, 0, 0)';
+				if(this.clue) {
+					context.fillStyle = 'rgb(0, 0, 0)';
+				}
+				else {
+					context.fillStyle = 'rgb(80, 0, 80)';
+				};
 			};
 
 			if(this.clue||preview) {
@@ -525,7 +536,7 @@
 	savedGame = localStorage.getItem(namespace),
 	savedObject,
 	sizes = getSizes(),
-	preview = false,
+	preview = true,
 	boxSize = sizes.box,
 	offset = sizes.offset,
 	game = new Scene(),
@@ -607,8 +618,8 @@
 
 	};
 
-	renderer.start();
-	// renderer.render();
+	// renderer.start();
+	renderer.render();
 
 	renderer.appendTo(document.body);
 
