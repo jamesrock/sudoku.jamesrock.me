@@ -536,7 +536,8 @@
 	savedGame = localStorage.getItem(namespace),
 	savedObject,
 	sizes = getSizes(),
-	preview = true,
+	preview = false,
+	lastGame = false,
 	boxSize = sizes.box,
 	offset = sizes.offset,
 	game = new Scene(),
@@ -564,7 +565,7 @@
 	},
 	startNewGame = function() {
 
-		if(!preview) {
+		if(!preview&&!lastGame) {
 			puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
 		};
 
