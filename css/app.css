@@ -6,5 +6,34 @@
 body {
 	font-family: sans-serif;
 	background-color: rgb(98, 181, 173);
+	font-size: 18px;
+}
+
+canvas {
 	cursor: pointer;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 10px 15px;
+}
+
+button {
+	border: 0;
+	padding: 10px 20px;
+	font-size: inherit;
+	background-color: white;
+	font-weight: bold;
+	font-family: inherit;
+	cursor: pointer;
+	display: block;
+	margin: 5px 0;
+	width: 100%;
+}
+
+button:active {
+	color: purple;
 }

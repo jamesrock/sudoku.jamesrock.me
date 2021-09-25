@@ -550,12 +550,12 @@
 	savedGame = localStorage.getItem(namespace),
 	savedObject,
 	sizes = getSizes(),
-	preview = false,
-	lastGame = false,
 	boxSize = sizes.box,
 	offset = sizes.offset,
-	game = new Scene(),
+	preview = false,
+	lastGame = false,
 	renderer = new Renderer(window.innerWidth, window.innerHeight),
+	game,
 	puzzle,
 	puzzleIndex = (puzzles.length-1),
 	saveGame = function() {
@@ -577,14 +577,16 @@
 		return this;
 
 	},
-	startNewGame = function() {
+	startNewGame = function(restart) {
 
-		if(!preview&&!lastGame) {
+		if(!preview&&!lastGame&&!restart) {
 			puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
 		};
 
 		puzzle = new Puzzle(puzzles[puzzleIndex], sizes);
 		localStorage.removeItem(namespace);
+
+		setup();
 
 	},
 	openSavedGame = function() {
@@ -594,7 +596,24 @@
 		puzzle = new Puzzle(puzzles[puzzleIndex], sizes);
 		puzzle.setValues(savedObject.values);
 
-	};
+		setup();
+
+	},
+	setup = function() {
+
+		game = new Scene();
+
+		renderer.setScene(game);
+
+		game.add(puzzle);
+
+		renderer.render();
+		// renderer.start();
+
+	},
+	hintButton = document.getElementById('hint'),
+	restartButton = document.getElementById('restart'),
+	newGameButton = document.getElementById('newgame');
 
 	if(!isTouch) {
 
@@ -605,16 +624,7 @@
 
 	if(savedGame) {
 
-		if(confirm(strings.continue)) {
-
-			openSavedGame();
-
-		}
-		else {
-
-			startNewGame();
-
-		};
+		openSavedGame();
 
 	}
 	else {
@@ -623,19 +633,28 @@
 
 	};
 
-	game.add(puzzle);
-
-	renderer.setScene(game);
-
-	renderer.onFrameChange = function() {
-
-		// unsure
-
-	};
-
-	// renderer.start();
-	renderer.render();
-
 	renderer.appendTo(document.body);
+
+	hintButton.addEventListener('click', function() {
+
+		console.log('HINT!');
+
+	});
+
+	restartButton.addEventListener('click', function() {
+
+		console.log('RESTART!');
+
+		startNewGame(true);
+
+	});
+
+	newGameButton.addEventListener('click', function() {
+
+		console.log('NEW GAME!');
+
+		startNewGame();
+
+	});
 
 })();
