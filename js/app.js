@@ -551,7 +551,7 @@
 	savedObject,
 	sizes = getSizes(),
 	preview = false,
-	lastGame = true,
+	lastGame = false,
 	boxSize = sizes.box,
 	offset = sizes.offset,
 	game = new Scene(),
