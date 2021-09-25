@@ -295,7 +295,7 @@
 			});
 
 		},
-		boxSize: 100,
+		boxSize: 50,
 		offset: 100
 	}),
 	PuzzleTile = DisplayObject.extend({
@@ -508,7 +508,7 @@
 	getSizes = function() {
 
 		var
-		boxSize = 100,
+		boxSize = 50,
 		offsetSize = 100,
 		textSize = 46,
 		screenWidth = window.innerWidth;
@@ -528,6 +528,10 @@
 		};
 
 		boxSize = (boxSize|0);
+
+		offsetSize = inflate(offsetSize);
+		boxSize = inflate(boxSize);
+
 		textSize = (boxSize-1);
 
 		// console.log(boxSize, textSize);
