@@ -140,6 +140,7 @@
 			this.boxes = puzzle[0];
 			this.numbers = puzzle[1];
 			this.clues = puzzle[2];
+			this.logic = puzzle[3];
 			this.boxSize = sizes.box;
 			this.offset = sizes.offset;
 			this.text = sizes.text;
@@ -154,7 +155,7 @@
 
 					inc = this.tiles.length;
 
-					tile = new PuzzleTile([row, col].join(''), boxSize, boxSize, (row*boxSize)+offset, (col*boxSize)+offset, !!this.clues[inc], this.numbers[inc]);
+					tile = new PuzzleTile([row, col].join(''), boxSize, boxSize, (row*boxSize)+offset, (col*boxSize)+offset, !!this.clues[inc], this.numbers[inc], this.logic[inc]);
 
 					if(!this.clues[inc]&&!preview) {
 						tile.bind(touchStartEvent, function() {
@@ -296,11 +297,51 @@
 			});
 
 		},
+		showHint: function() {
+
+			var
+			nextIndex = this.count()+1,
+			nextTile;
+
+			this.tiles.forEach(function(tile, index) {
+
+				if(tile.logic===nextIndex) {
+
+					nextTile = tile;
+					return false;
+
+				};
+
+			});
+
+			nextTile.fill();
+
+			console.log(nextTile);
+
+		},
+		count: function() {
+
+			var
+			correct = 0;
+
+			this.tiles.forEach(function(tile) {
+
+				if(tile.check()) {
+
+					correct ++;
+
+				};
+
+			});
+
+			return correct;
+
+		},
 		boxSize: 50,
 		offset: 100
 	}),
 	PuzzleTile = DisplayObject.extend({
-		constructor: function PuzzleTile(name, width, height, x, y, clue, correct) {
+		constructor: function PuzzleTile(name, width, height, x, y, clue, correct, logic) {
 
 			this.name = name;
 			this.x = x;
@@ -309,6 +350,7 @@
 			this.height = height;
 			this.clue = clue;
 			this.correct = correct;
+			this.logic = logic;
 
 			if(clue) {
 				this.value = this.correct;
@@ -385,6 +427,11 @@
 			};
 
 			return _return;
+
+		},
+		fill: function() {
+
+			this.value = this.correct;
 
 		},
 		value: 0,
@@ -553,7 +600,7 @@
 	boxSize = sizes.box,
 	offset = sizes.offset,
 	preview = false,
-	lastGame = false,
+	lastGame = true,
 	renderer = new Renderer(window.innerWidth, window.innerHeight),
 	game,
 	puzzle,
@@ -638,6 +685,9 @@
 	hintButton.addEventListener('click', function() {
 
 		console.log('HINT!');
+
+		puzzle.showHint();
+		renderer.render();
 
 	});
 
