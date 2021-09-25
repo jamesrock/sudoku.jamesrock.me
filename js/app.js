@@ -1,6 +1,12 @@
 (function() {
 
 	var
+	deflate = function(value) {
+		return value/2;
+	},
+	inflate = function(value) {
+		return value*2;
+	},
 	DisplayObject = ROCK.Object.extend({
 		x: 0,
 		y: 0,
@@ -39,6 +45,9 @@
 					touchY = touch.offsetY;
 
 				};
+
+				touchX = inflate(touchX);
+				touchY = inflate(touchY);
 
 				if(new Circle('red', 3, touchX, touchY).hitTest(sprite)) {
 
@@ -179,7 +188,7 @@
 			rowsAndCols = 8;
 
 			context.lineCap = 'round';
-			context.lineWidth = 3;
+			context.lineWidth = 8;
 
 			for(var boxCount=0;boxCount<boxes.length;boxCount++) {
 
@@ -213,7 +222,7 @@
 
 			};
 
-			context.lineWidth = 1;
+			context.lineWidth = 4;
 
 			for(var row=1; row<=rowsAndCols; row++) {
 
@@ -286,7 +295,7 @@
 			});
 
 		},
-		boxSize: 50,
+		boxSize: 100,
 		offset: 100
 	}),
 	PuzzleTile = DisplayObject.extend({
@@ -399,16 +408,17 @@
 	Renderer = ROCK.Object.extend({
 		constructor: function Renderer(width, height) {
 
+			console.log(width, height, width*2, height*2);
+			// console.log('new Renderer()', this, arguments);
+
 			this.width = width;
 			this.height = height;
-
-			// console.log('new Renderer()', this, arguments);
 
 			this.node = document.createElement('canvas');
 			this.context = this.node.getContext(this.type);
 
-			this.node.width = (this.width);
-			this.node.height = (this.height);
+			this.node.width = (this.width*2);
+			this.node.height = (this.height*2);
 
 			this.node.style.width = (this.width + 'px');
 			this.node.style.height = (this.height + 'px');
@@ -421,7 +431,7 @@
 			_this = this;
 
 			// clear
-			this.node.width = this.width;
+			this.node.width = this.width*2;
 
 			for(var i=0;i<childrenCount;i++) {
 
@@ -498,7 +508,7 @@
 	getSizes = function() {
 
 		var
-		boxSize = 50,
+		boxSize = 100,
 		offsetSize = 100,
 		textSize = 46,
 		screenWidth = window.innerWidth;
@@ -537,7 +547,7 @@
 	savedObject,
 	sizes = getSizes(),
 	preview = false,
-	lastGame = false,
+	lastGame = true,
 	boxSize = sizes.box,
 	offset = sizes.offset,
 	game = new Scene(),
