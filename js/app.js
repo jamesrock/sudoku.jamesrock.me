@@ -1,11 +1,12 @@
 (function() {
 
 	var
-	deflate = function(value) {
-		return value/2;
-	},
+	pixelRatio = window.devicePixelRatio||1,
 	inflate = function(value) {
-		return value*2;
+		return value*pixelRatio;
+	},
+	deflate = function(value) {
+		return value/pixelRatio;
 	},
 	DisplayObject = ROCK.Object.extend({
 		x: 0,
@@ -408,7 +409,6 @@
 	Renderer = ROCK.Object.extend({
 		constructor: function Renderer(width, height) {
 
-			console.log(width, height, width*2, height*2);
 			// console.log('new Renderer()', this, arguments);
 
 			this.width = width;
@@ -417,8 +417,8 @@
 			this.node = document.createElement('canvas');
 			this.context = this.node.getContext(this.type);
 
-			this.node.width = (this.width*2);
-			this.node.height = (this.height*2);
+			this.node.width = inflate(this.width);
+			this.node.height = inflate(this.height);
 
 			this.node.style.width = (this.width + 'px');
 			this.node.style.height = (this.height + 'px');
@@ -431,7 +431,7 @@
 			_this = this;
 
 			// clear
-			this.node.width = this.width*2;
+			this.node.width = inflate(this.width);
 
 			for(var i=0;i<childrenCount;i++) {
 
