@@ -315,7 +315,7 @@
 
 			};
 
-			tile.hint = true;
+			tile.showHint();
 
 			console.log(tile);
 
@@ -438,6 +438,12 @@
 			};
 
 			return _return;
+
+		},
+		showHint: function() {
+
+			this.hint = true;
+			this.value = 0;
 
 		},
 		value: 0,
@@ -693,7 +699,7 @@
 
 		puzzle.showHint();
 		renderer.render();
-		// saveGame();
+		saveGame();
 
 	});
 
