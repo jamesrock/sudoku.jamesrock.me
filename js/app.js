@@ -641,7 +641,7 @@
 			puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
 		};
 
-		puzzleIndex = 11;
+		puzzleIndex = 10;
 
 		puzzle = new Puzzle(puzzles[puzzleIndex], sizes);
 		localStorage.removeItem(namespace);
