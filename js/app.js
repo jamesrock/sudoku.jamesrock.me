@@ -174,25 +174,28 @@
 
 			};
 
+			this.tiles.sort(function(a, b) {
+				return a.logic-b.logic;
+			});
+
 			console.log(this);
 
 		},
 		render: function() {
 
 			var
-			_this = this,
 			boxes = this.boxes,
-			box,
-			point,
 			boxSize = this.boxSize,
 			offset = this.offset,
 			context = renderer.context,
-			rowsAndCols = 8;
+			rowsAndCols = 8,
+			box,
+			point;
 
 			context.lineCap = 'round';
-			context.lineWidth = 8;
+			context.lineWidth = inflate(4);
 
-			for(var boxCount=0;boxCount<boxes.length;boxCount++) {
+			for(var boxCount=0; boxCount<boxes.length; boxCount++) {
 
 				box = boxes[boxCount];
 
@@ -224,7 +227,7 @@
 
 			};
 
-			context.lineWidth = 4;
+			context.lineWidth = inflate(2);
 
 			for(var row=1; row<=rowsAndCols; row++) {
 
@@ -242,9 +245,9 @@
 
 			context.stroke();
 
-			for(var tile=0; tile<_this.tiles.length; tile++) {
+			for(var tile=0; tile<this.tiles.length; tile++) {
 
-				_this.tiles[tile].render();
+				this.tiles[tile].render();
 
 			};
 
@@ -300,23 +303,21 @@
 		showHint: function() {
 
 			var
-			nextIndex = this.count()+1,
-			nextTile;
+			tile;
 
-			this.tiles.forEach(function(tile, index) {
+			for(var tileIndex=0; tileIndex<this.tiles.length; tileIndex++) {
 
-				if(tile.logic===nextIndex) {
+				tile = this.tiles[tileIndex];
 
-					nextTile = tile;
-					return false;
-
+				if(!tile.check()) {
+					break;
 				};
 
-			});
+			};
 
-			nextTile.fill();
+			tile.hint = true;
 
-			console.log(nextTile);
+			console.log(tile);
 
 		},
 		count: function() {
@@ -391,13 +392,21 @@
 				if(this.clue) {
 					context.fillStyle = 'rgb(0, 0, 0)';
 				}
+				else if(this.hint) {
+					context.fillStyle = 'rgb(255, 0, 0)';
+				}
 				else {
-					context.fillStyle = 'rgb(80, 0, 80)';
+					// context.fillStyle = 'rgb(80, 0, 80)';
+					context.fillStyle = 'rgb(0, 0, 200)';
 				};
 			};
 
 			if(this.clue||preview) {
 				context.fillText(this.correct, xAlign, yAlign);
+			}
+			else if(this.hint) {
+				context.fillText('?', xAlign, yAlign);
+				this.hint = false;
 			}
 			else {
 				context.fillText(this.value===0?'':this.value, xAlign, yAlign);
@@ -429,15 +438,11 @@
 			return _return;
 
 		},
-		fill: function() {
-
-			this.value = this.correct;
-
-		},
 		value: 0,
 		maxValue: 9,
 		clue: false,
-		correct: 9
+		correct: 9,
+		hint: false
 	}),
 	Scene = ROCK.Object.extend({
 		constructor: function Scene() {
@@ -474,8 +479,7 @@
 		render: function() {
 
 			var
-			childrenCount = this.scene.children.length,
-			_this = this;
+			childrenCount = this.scene.children.length;
 
 			// clear
 			this.node.width = inflate(this.width);
@@ -684,24 +688,19 @@
 
 	hintButton.addEventListener('click', function() {
 
-		console.log('HINT!');
-
 		puzzle.showHint();
 		renderer.render();
+		// saveGame();
 
 	});
 
 	restartButton.addEventListener('click', function() {
-
-		console.log('RESTART!');
 
 		startNewGame(true);
 
 	});
 
 	newGameButton.addEventListener('click', function() {
-
-		console.log('NEW GAME!');
 
 		startNewGame();
 
