@@ -393,10 +393,11 @@
 					context.fillStyle = 'rgb(0, 0, 0)';
 				}
 				else if(this.hint) {
-					context.fillStyle = 'rgb(255, 0, 0)';
+					context.fillStyle = 'rgb(200, 0, 0)';
 				}
 				else {
 					// context.fillStyle = 'rgb(80, 0, 80)';
+					// context.fillStyle = 'rgb(150, 0, 150)';
 					context.fillStyle = 'rgb(0, 0, 200)';
 				};
 			};
@@ -406,7 +407,6 @@
 			}
 			else if(this.hint) {
 				context.fillText('?', xAlign, yAlign);
-				this.hint = false;
 			}
 			else {
 				context.fillText(this.value===0?'':this.value, xAlign, yAlign);
@@ -416,6 +416,8 @@
 
 		},
 		cycle: function() {
+
+			this.hint = false;
 
 			if(this.value<(this.maxValue)) {
 				this.value ++;
@@ -442,7 +444,8 @@
 		maxValue: 9,
 		clue: false,
 		correct: 9,
-		hint: false
+		hint: false,
+		logic: 0
 	}),
 	Scene = ROCK.Object.extend({
 		constructor: function Scene() {
@@ -517,8 +520,6 @@
 				return this;
 
 			};
-
-			this.onFrameChange.call(this);
 
 			return this;
 
@@ -608,7 +609,7 @@
 	renderer = new Renderer(window.innerWidth, window.innerHeight),
 	game,
 	puzzle,
-	puzzleIndex = (puzzles.length-1),
+	puzzleIndex = puzzles.length-1,
 	saveGame = function() {
 
 		var
@@ -630,9 +631,11 @@
 	},
 	startNewGame = function(restart) {
 
-		if(!preview&&!lastGame&&!restart) {
+		if(!lastGame&&!preview&&!restart) {
 			puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
 		};
+
+		puzzleIndex = 11;
 
 		puzzle = new Puzzle(puzzles[puzzleIndex], sizes);
 		localStorage.removeItem(namespace);
