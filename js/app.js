@@ -157,7 +157,7 @@
 					inc = this.tiles.length;
 					clue = this.logic[inc]<=this.hints;
 
-					tile = new PuzzleTile([row, col].join(''), boxSize, boxSize, (row*boxSize)+offset, (col*boxSize)+offset, clue, this.numbers[inc], this.logic[inc]);
+					tile = new PuzzleTile([row, col].join(''), boxSize, boxSize, (row*boxSize)+offset, (col*boxSize)+offset, clue, this.numbers[inc]||0, this.logic[inc]||0);
 
 					if(!clue&&!preview) {
 						tile.bind(touchStartEvent, function() {
@@ -451,7 +451,7 @@
 		value: 0,
 		maxValue: 9,
 		clue: false,
-		correct: 9,
+		correct: 0,
 		hint: false,
 		logic: 0
 	}),
@@ -612,8 +612,8 @@
 	sizes = getSizes(),
 	boxSize = sizes.box,
 	offset = sizes.offset,
-	preview = false,
-	lastGame = false,
+	preview = true,
+	lastGame = true,
 	renderer = new Renderer(window.innerWidth, window.innerHeight),
 	game,
 	puzzle,
