@@ -159,7 +159,7 @@
 
 					tile = new PuzzleTile([row, col].join(''), boxSize, boxSize, (row*boxSize)+offset, (col*boxSize)+offset, clue, this.numbers[inc]||0, this.logic[inc]||0);
 
-					if(!clue&&!(mode==='preview')) {
+					if(!clue&&(mode==='play')) {
 						tile.bind(touchStartEvent, function() {
 
 							this.cycle();
