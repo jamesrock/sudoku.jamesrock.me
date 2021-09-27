@@ -613,7 +613,7 @@
 	boxSize = sizes.box,
 	offset = sizes.offset,
 	preview = false,
-	lastGame = false,
+	lastGame = true,
 	renderer = new Renderer(window.innerWidth, window.innerHeight),
 	game,
 	puzzle,
@@ -642,8 +642,6 @@
 		if(!lastGame&&!preview&&!restart) {
 			puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
 		};
-
-		// puzzleIndex = 12;
 
 		puzzle = new Puzzle(puzzles[puzzleIndex], sizes);
 		localStorage.removeItem(namespace);
