@@ -613,7 +613,7 @@
 	boxSize = sizes.box,
 	offset = sizes.offset,
 	preview = false,
-	lastGame = true,
+	lastGame = false,
 	renderer = new Renderer(window.innerWidth, window.innerHeight),
 	game,
 	puzzle,
