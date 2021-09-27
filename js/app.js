@@ -8,6 +8,9 @@
 	deflate = function(value) {
 		return value/pixelRatio;
 	},
+	ifModeIs = function(value) {
+		return mode===value;
+	},
 	DisplayObject = ROCK.Object.extend({
 		x: 0,
 		y: 0,
@@ -159,7 +162,7 @@
 
 					tile = new PuzzleTile([row, col].join(''), boxSize, boxSize, (row*boxSize)+offset, (col*boxSize)+offset, clue, this.numbers[inc]||0, this.logic[inc]||0);
 
-					if(!clue&&!preview) {
+					if(!clue&&!(mode==='preview')) {
 						tile.bind(touchStartEvent, function() {
 
 							this.cycle();
@@ -380,15 +383,24 @@
 			context.textAlign = 'center';
 			context.textBaseline = 'middle';
 			context.globalAlpha = this.opacity;
-			context.font = `${text}px Helvetica`;
 
-			if(preview) {
+			if(mode==='logic') {
+				context.font = `${text/2}px Helvetica`;
+			}
+			else {
+				context.font = `${text}px Helvetica`;
+			};
+
+			if(mode==='preview') {
 				if(this.clue) {
 					context.fillStyle = 'rgb(200, 0, 0)';
 				}
 				else {
 					context.fillStyle = 'rgb(0, 0, 0)';
 				};
+			}
+			else if(mode==='logic') {
+				context.fillStyle = 'rgb(0, 0, 0)';
 			}
 			else {
 				if(this.clue) {
@@ -398,20 +410,23 @@
 					context.fillStyle = 'rgb(200, 0, 0)';
 				}
 				else {
-					// context.fillStyle = 'rgb(80, 0, 80)';
-					// context.fillStyle = 'rgb(150, 0, 150)';
 					context.fillStyle = 'rgb(0, 0, 200)';
 				};
-			};
-
-			if(this.clue||preview) {
-				context.fillText(this.correct, xAlign, yAlign);
 			}
-			else if(this.hint) {
-				context.fillText('?', xAlign, yAlign);
+
+			if(mode==='logic') {
+				context.fillText(this.logic, xAlign, yAlign);
 			}
 			else {
-				context.fillText(this.value===0?'':this.value, xAlign, yAlign);
+				if(this.clue||mode==='preview') {
+					context.fillText(this.correct, xAlign, yAlign);
+				}
+				else if(this.hint) {
+					context.fillText('?', xAlign, yAlign);
+				}
+				else {
+					context.fillText(this.value===0?'':this.value, xAlign, yAlign);
+				};
 			};
 
 			context.restore();
@@ -612,8 +627,7 @@
 	sizes = getSizes(),
 	boxSize = sizes.box,
 	offset = sizes.offset,
-	preview = true,
-	lastGame = true,
+	mode = 'play', // preview, logic, clues, play
 	renderer = new Renderer(window.innerWidth, window.innerHeight),
 	game,
 	puzzle,
@@ -639,7 +653,7 @@
 	},
 	startNewGame = function(restart) {
 
-		if(!lastGame&&!preview&&!restart) {
+		if((mode==='play')&&!restart) {
 			puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
 		};
 
