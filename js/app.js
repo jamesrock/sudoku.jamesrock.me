@@ -139,25 +139,27 @@
 			this.tiles = [];
 			this.boxes = puzzle[0];
 			this.numbers = puzzle[1];
-			this.clues = puzzle[2];
-			this.logic = puzzle[3];
+			this.logic = puzzle[2];
+			this.hints = puzzle[3];
 			this.boxSize = sizes.box;
 			this.offset = sizes.offset;
 			this.text = sizes.text;
 
 			var
 			inc,
-			tile;
+			tile,
+			clue;
 
 			for(var col=0;col<9;col++) {
 
 				for(var row=0;row<9;row++) {
 
 					inc = this.tiles.length;
+					clue = this.logic[inc]<=this.hints;
 
-					tile = new PuzzleTile([row, col].join(''), boxSize, boxSize, (row*boxSize)+offset, (col*boxSize)+offset, !!this.clues[inc], this.numbers[inc], this.logic[inc]);
+					tile = new PuzzleTile([row, col].join(''), boxSize, boxSize, (row*boxSize)+offset, (col*boxSize)+offset, clue, this.numbers[inc], this.logic[inc]);
 
-					if(!this.clues[inc]&&!preview) {
+					if(!clue&&!preview) {
 						tile.bind(touchStartEvent, function() {
 
 							this.cycle();
@@ -641,7 +643,7 @@
 			puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
 		};
 
-		puzzleIndex = 10;
+		puzzleIndex = 12;
 
 		puzzle = new Puzzle(puzzles[puzzleIndex], sizes);
 		localStorage.removeItem(namespace);
