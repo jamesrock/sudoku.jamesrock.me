@@ -8,9 +8,6 @@
 	deflate = function(value) {
 		return value/pixelRatio;
 	},
-	ifModeIs = function(value) {
-		return mode===value;
-	},
 	DisplayObject = ROCK.Object.extend({
 		x: 0,
 		y: 0,
