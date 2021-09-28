@@ -62,26 +62,7 @@
 
 			renderer.node.addEventListener(event, handlerProxy);
 
-			events[this.name] = events[this.name]||[];
-			events[this.name].push({
-				type: event,
-				handler: handler,
-				handlerProxy: handlerProxy
-			});
-
 			return this;
-
-		},
-		unbind: function(event, handler) {
-
-			var
-			obj = events[this.name].filter(function(e) {
-				return e.type===event&&e.handler===handler;
-			})[0];
-
-			events[this.name].splice(events[this.name].indexOf(obj), 1);
-
-			this.scene.renderer.node.removeEventListener(event, obj.handlerProxy);
 
 		},
 		move: function(prop, value) {
@@ -516,9 +497,12 @@
 			return this;
 
 		},
-		appendTo: function(child) {
+		appendTo: function(replace) {
 
-			child.appendChild(this.node);
+			console.log('appendTo', replace);
+
+			// child.appendChild(this.node);
+			document.body.replaceChild(this.node, replace);
 			return this;
 
 		},
@@ -625,7 +609,7 @@
 	boxSize = sizes.box,
 	offset = sizes.offset,
 	mode = 'play', // preview, logic, clues, play
-	renderer = new Renderer(window.innerWidth, window.innerHeight),
+	renderer,
 	game,
 	puzzle,
 	puzzleIndex = puzzles.length-1,
@@ -650,6 +634,8 @@
 	},
 	startNewGame = function(restart) {
 
+		renderer = new Renderer(window.innerWidth, window.innerHeight);
+
 		if((mode==='play')&&!restart) {
 			puzzleIndex = ROCK.MATH.random(0, puzzles.length-1);
 		};
@@ -662,6 +648,7 @@
 	},
 	openSavedGame = function() {
 
+		renderer = new Renderer(window.innerWidth, window.innerHeight);
 		savedObject = JSON.parse(savedGame);
 		puzzleIndex = savedObject.puzzle;
 		puzzle = new Puzzle(puzzles[puzzleIndex], sizes);
@@ -680,6 +667,8 @@
 
 		renderer.render();
 		// renderer.start();
+
+		renderer.appendTo(document.querySelector('canvas'));
 
 	},
 	hintButton = document.getElementById('hint'),
@@ -703,8 +692,6 @@
 		startNewGame();
 
 	};
-
-	renderer.appendTo(document.body);
 
 	hintButton.addEventListener('click', function() {
 
