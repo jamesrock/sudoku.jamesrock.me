@@ -560,7 +560,6 @@
 		complete: 'well done!',
 		continue: 'continue saved game?'
 	},
-	events = {},
 	getSizes = function() {
 
 		var
