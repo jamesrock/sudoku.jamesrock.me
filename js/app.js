@@ -499,9 +499,6 @@
 		},
 		appendTo: function(replace) {
 
-			console.log('appendTo', replace);
-
-			// child.appendChild(this.node);
 			document.body.replaceChild(this.node, replace);
 			return this;
 
