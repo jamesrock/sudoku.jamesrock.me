@@ -388,7 +388,8 @@
 					context.fillStyle = 'rgb(200, 0, 0)';
 				}
 				else {
-					context.fillStyle = 'rgb(0, 0, 200)';
+					// context.fillStyle = 'rgb(0, 0, 200)';
+					context.fillStyle = 'rgb(0, 120, 255)';
 				};
 			}
 

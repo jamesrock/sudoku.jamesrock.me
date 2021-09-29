@@ -32,6 +32,8 @@ button {
 	display: block;
 	margin: 5px 0;
 	width: 100%;
+	color: rgb(0, 120, 255);
+	border-radius: 2px;
 }
 
 button:active {
