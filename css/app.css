@@ -7,6 +7,7 @@ body {
 	font-family: sans-serif;
 	background-color: rgb(98, 181, 173);
 	font-size: 18px;
+	color: rgb(10, 10, 10);
 }
 
 canvas {
@@ -32,8 +33,9 @@ button {
 	display: block;
 	margin: 5px 0;
 	width: 100%;
+	/* color: rgb(20, 20, 20); */
 	color: rgb(0, 120, 255);
-	border-radius: 2px;
+	border-radius: 4px;
 }
 
 button:active {
