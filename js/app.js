@@ -363,10 +363,10 @@
 			context.globalAlpha = this.opacity;
 
 			if(mode==='logic') {
-				context.font = `${text/2}px Helvetica`;
+				context.font = `${text/2}px sans-serif`;
 			}
 			else {
-				context.font = `${text}px Helvetica`;
+				context.font = `${text}px sans-serif`;
 			};
 
 			if(mode==='preview') {
