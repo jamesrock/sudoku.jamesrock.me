@@ -389,7 +389,9 @@
 				}
 				else {
 					// context.fillStyle = 'rgb(0, 0, 200)';
-					context.fillStyle = 'rgb(0, 110, 255)';
+					context.fillStyle = 'rgb(0, 100, 255)';
+					// context.fillStyle = 'rgb(0, 110, 255)';
+					// context.fillStyle = 'rgb(0, 120, 255)';
 				};
 			}
 
